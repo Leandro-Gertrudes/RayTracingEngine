@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minilibx_setup.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 19:33:59 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/12/14 20:08:37 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2026/01/18 15:30:09 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

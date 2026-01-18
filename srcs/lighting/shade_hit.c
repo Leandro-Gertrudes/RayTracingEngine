@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shade_hit_bonus.c                                  :+:      :+:    :+:   */
+/*   shade_hit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 14:57:47 by lgertrud          #+#    #+#             */
-/*   Updated: 2025/12/29 15:55:05 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/18 15:27:28 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,9 @@ t_rgb	shade_hit(t_scene *sc, t_hit *hit, t_vec3 point, t_vec3 normal)
 		if (!is_in_shadow(sc, point, sc->lights[i]))
 		{
 			light_dir = vec3_normalize(
-				vec3_sub(sc->lights[i]->position, point)
-			);
+					vec3_sub(sc->lights[i]->position, point));
 			view_dir = vec3_normalize(
-				vec3_sub(sc->camera->position, point)
-			);
+					vec3_sub(sc->camera->position, point));
 
 			/* diffuse */
 			tmp = apply_diffuse(

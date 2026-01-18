@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt_bonus.h                                     :+:      :+:    :+:   */
+/*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/03 16:27:30 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/18 15:50:20 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define M_PI	3.14159265358979323846
 # define ERROR_PARAM "Error\nUsage: ./minirt <file.rt>"
+# define ERROR_FRAMES "Error\nUsage: ./minirt <file.rt> --frames <numFirstFrame> <numLastFrame>"
 # define ERROR_FILE "Error\nCannot open this found."
 # define ERROR_MALLOC "Error\nCannot allocate memmory."
 # define ERROR_SCENE "Error\ninvalid scene."
@@ -37,6 +38,16 @@
 # define MOTIONNOTIFY    6
 # define DESTROYNOTIFY   17
 # define EXPOSE          12
+
+typedef enum e_mode {
+    DEFAULT,
+    ANIMATE,
+    SAVE_FRAMES
+} t_mode;
+
+extern t_mode g_mode;
+extern int	startFrame;
+extern int	endFrame;
 
 enum e_event_mask
 {
@@ -293,6 +304,7 @@ typedef struct s_thread_data
 	int		y_end;
 }	t_thread_data;
 
+void	ft_minirt(char	*file);
 // ============ Parser ============
 
 void			ft_exit(char *message, int code);

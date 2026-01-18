@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ani.c                                              :+:      :+:    :+:   */
+/*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 16:10:46 by lgertrud          #+#    #+#             */
-/*   Updated: 2025/12/30 19:04:09 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/18 16:08:28 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include <sys/time.h>
 
-
-
 void	update_time(t_scene *sc)
 {
-	static double	last = 0;
-	double			now;
-
-	now = get_time_sec();
-	if (last == 0)
-		last = now;
-	sc->time.delta = now - last;
-	sc->time.current += sc->time.delta;
-	last = now;
+    sc->time.delta = 1.0 / 24.0;   // ou 1.0 / 30.0
+    sc->time.current += sc->time.delta;
 }
 void	init_anim_light(t_scene *sc)
 {
