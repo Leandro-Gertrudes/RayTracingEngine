@@ -6,7 +6,7 @@
 #    By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/13 20:39:24 by ghenriqu          #+#    #+#              #
-#    Updated: 2026/01/18 16:57:35 by lgertrud         ###   ########.fr        #
+#    Updated: 2026/01/20 13:49:27 by lgertrud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ SRC	=	$(SRC_DIR)/parser/0-main.c \
 		$(SRC_DIR)/render/render.c \
 			$(SRC_DIR)/render/normal.c \
 			$(SRC_DIR)/render/low_render.c \
+			$(SRC_DIR)/render/transition.c \
 		$(SRC_DIR)/graphics/events.c \
 			$(SRC_DIR)/graphics/minilibx_setup.c \
 		$(SRC_DIR)/animation/light.c \

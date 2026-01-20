@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/18 17:33:21 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/20 14:17:23 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ typedef enum e_mode {
     SAVE_FRAMES
 } t_mode;
 
-extern t_mode g_mode;
-extern int	startFrame;
-extern int	endFrame;
-extern bool	low_render;
+extern t_mode 			g_mode;
+extern int				startFrame;
+extern int				endFrame;
+extern bool				low_render;
+
 
 enum e_event_mask
 {
@@ -402,6 +403,7 @@ t_rgb			apply_specular(
 				double shininess);
 void			display_image(t_scene *scene);
 void			low_render_scene(t_scene *scene);
+void			render_transition(t_scene *scene);
 
 // ==== graphics ====
 int				key_press(int keycode, t_scene *scene);
