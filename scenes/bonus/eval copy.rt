@@ -1,0 +1,22 @@
+# Scene description file for ray tracer. We made it to assist in the evaluation process :)
+# Ambient lighting { intensity color }
+A 0.1 255,255,255
+
+# Camera { position direction FOV (aka openness) }
+C 4,1.5,-20 0,-0.15,1 20
+
+# Light { position intensity color }
+L 0,20,-2 1 255,0,255
+L -4,20,0 1 255,255,0
+#L -10,8,-15 1 255,255,255
+#L 0,10,0 0.1 255,255,255
+
+# We should have at least one item (aka cy sp pl)
+# basic sphere at the spot 0,0,0#
+sp 5,0,0 1 255,255,0 0
+sp 4,0,1 1 255,255,0 0.3
+sp 3,0,0 1 255,255,0 0.9
+#sp 5,0,4 1 255,0,255
+
+# floor plane
+pl 0,-0.5,0 0,1,0 200,200,200 0.6

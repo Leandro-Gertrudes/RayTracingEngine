@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/18 15:50:20 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/18 17:33:21 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef enum e_mode {
 extern t_mode g_mode;
 extern int	startFrame;
 extern int	endFrame;
+extern bool	low_render;
 
 enum e_event_mask
 {
@@ -305,6 +306,7 @@ typedef struct s_thread_data
 }	t_thread_data;
 
 void	ft_minirt(char	*file);
+
 // ============ Parser ============
 
 void			ft_exit(char *message, int code);
@@ -398,11 +400,14 @@ t_rgb			apply_specular(
 				t_vec3 view_dir,
 				t_light *light,
 				double shininess);
+void			display_image(t_scene *scene);
+void			low_render_scene(t_scene *scene);
 
 // ==== graphics ====
 int				key_press(int keycode, t_scene *scene);
 int				close_window(t_scene *scene);
 void			ft_init_graphics(t_scene *scene);
+void			draw_hud(t_scene *scene);
 
 // ==== animation ====
 
@@ -419,7 +424,5 @@ void	save_image_ppm(t_image *img, char *filename);
 void	render_animation(t_scene *sc);
 t_image	*image_create(int width, int height);
 void	image_clear(t_image *img);
-
-
 
 #endif

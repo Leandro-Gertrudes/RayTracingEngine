@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:42:38 by ghenriqu          #+#    #+#             */
-/*   Updated: 2026/01/18 15:30:01 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/18 17:53:36 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,41 @@ int	close_window(t_scene *scene)
 
 int	key_press(int keycode, t_scene *scene)
 {
-	if (keycode == 65307)
-		close_window(scene);
+	if (keycode == 65307) // ESC
+		return (close_window(scene));
+
+	if (keycode == 32) // SPACE
+	{
+		low_render = !low_render;
+
+		// Tela preta
+		t_rgb black = {0,0,0};
+		for (int y = 0; y < HEIGHT; y++)
+			for (int x = 0; x < WIDTH; x++)
+				put_pixel(scene, x, y, rgb_to_int(black));
+
+		// Atualiza a janela antes do render
+		mlx_put_image_to_window(scene->disp.mlx, scene->disp.win,
+			scene->disp.img, 0, 0);
+
+		// Loading
+		mlx_string_put(scene->disp.mlx, scene->disp.win,
+			WIDTH / 2 - 60, HEIGHT / 2,
+			0xFFFFFF, "Loading...");
+		mlx_do_sync(scene->disp.mlx);
+
+		// Render
+		if (low_render)
+		{
+			low_render_scene(scene);
+			draw_hud(scene);
+		}
+		else
+		{
+			render_scene(scene);
+		}
+}
+
 	return (0);
 }
 

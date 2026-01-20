@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 18:48:20 by ghenriqu          #+#    #+#             */
-/*   Updated: 2026/01/04 17:53:52 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/18 17:03:30 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ t_rgb	compute_pixel_color(t_scene *scene, t_ray ray, int depth)
 // 	}
 // }
 
-static void	display_image(t_scene *scene)
+void	display_image(t_scene *scene)
 {
 	if (scene->disp.mlx && scene->disp.win && scene->disp.img)
 		mlx_put_image_to_window(scene->disp.mlx,

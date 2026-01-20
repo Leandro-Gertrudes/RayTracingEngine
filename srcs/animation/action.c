@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:05:20 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/18 16:07:50 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/18 16:15:09 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,30 +75,6 @@ void	save_image_ppm(t_image *img, char *filename)
 	close(fd);
 }
 
-
-int	render_loop(void *param)
-{
-	t_scene	*sc;
-
-	sc = (t_scene *)param;
-	update_scene(sc);
-	render_scene(sc);
-	return (0);
-}
-
-void	update_scene(t_scene *sc)
-{
-	update_time(sc);
-	update_anim_light(sc);
-	//update_anim_camera(sc);
-
-	sc->camera->camdata = ft_compute_camera(
-		*sc->camera,
-		WIDTH,
-		HEIGHT
-	);
-}
-
 t_image	*image_create(int width, int height)
 {
 	t_image	*img;
@@ -129,4 +105,28 @@ void	image_clear(t_image *img)
 		img->pixels[i].b = 0;
 		i++;
 	}
+}
+
+// --animate
+int	render_loop(void *param)
+{
+	t_scene	*sc;
+
+	sc = (t_scene *)param;
+	update_scene(sc);
+	render_scene(sc);
+	return (0);
+}
+
+void	update_scene(t_scene *sc)
+{
+	update_time(sc);
+	update_anim_light(sc);
+	//update_anim_camera(sc);
+
+	sc->camera->camdata = ft_compute_camera(
+		*sc->camera,
+		WIDTH,
+		HEIGHT
+	);
 }
