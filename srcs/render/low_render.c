@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:57:06 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/18 16:58:53 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/20 16:58:29 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,4 +128,57 @@ void	low_render_scene(t_scene *scene)
 		i++;
 	}
 	display_image(scene);
+	draw_hud(scene);
+}
+
+void draw_hud(t_scene *scene)
+{
+	int x = 10, y = 10;
+	int w = 150, h = 220; 
+	int alpha = 150;
+	t_rgb color;
+	char buf[128];
+
+	//box
+	for (int j = y; j < y + h; j++)
+	{
+		for (int i = x; i < x + w; i++)
+		{
+			t_rgb old = get_pixel(scene, j, i);
+
+			color.r = (old.r * (255 - alpha)) / 255;
+			color.g = (old.g * (255 - alpha)) / 255;
+			color.b = (old.b * (255 - alpha)) / 255;
+
+			put_pixel(scene, j, i, rgb_to_int(color));
+		}
+	}
+
+	mlx_put_image_to_window(scene->disp.mlx, scene->disp.win,
+		scene->disp.img, 0, 0);
+
+	int line_y = y + 15;
+	mlx_string_put(scene->disp.mlx, scene->disp.win, x + 10, line_y, 0xFFD700, "MiniRaytracer"); // título em dourado
+	line_y += 20;
+
+	snprintf(buf, sizeof(buf), "Mode: %s", ("PREVIEW"));
+	mlx_string_put(scene->disp.mlx, scene->disp.win, x + 10, line_y, 0xFFFFFF, buf);
+	line_y += 20;
+
+	snprintf(buf, sizeof(buf), "Camera Pos: (%.2f, %.2f, %.2f)",
+		scene->camera->position.x, scene->camera->position.y, scene->camera->position.z);
+	mlx_string_put(scene->disp.mlx, scene->disp.win, x + 10, line_y, 0xFFFFFF, buf);
+	line_y += 20;
+
+	snprintf(buf, sizeof(buf), "Camera Vec: (%.2f, %.2f, %.2f)",
+		scene->camera->vector.x, scene->camera->vector.y, scene->camera->vector.z);
+	mlx_string_put(scene->disp.mlx, scene->disp.win, x + 10, line_y, 0xFFFFFF, buf); // vetor em ciano
+	line_y += 20;
+
+	snprintf(buf, sizeof(buf), "Objects: %d", scene->object_count);
+	mlx_string_put(scene->disp.mlx, scene->disp.win, x + 10, line_y, 0xFFFFFF, buf);
+	line_y += 20;
+
+	snprintf(buf, sizeof(buf), "FOV: %d", scene->camera->fov);
+	mlx_string_put(scene->disp.mlx, scene->disp.win, x + 10, line_y, 0xFFFFFF, buf);
 }

@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/20 14:17:23 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/20 17:06:12 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -404,12 +404,15 @@ t_rgb			apply_specular(
 void			display_image(t_scene *scene);
 void			low_render_scene(t_scene *scene);
 void			render_transition(t_scene *scene);
+t_rgb			get_pixel(t_scene *scene, int x, int y);
 
 // ==== graphics ====
 int				key_press(int keycode, t_scene *scene);
 int				close_window(t_scene *scene);
 void			ft_init_graphics(t_scene *scene);
 void			draw_hud(t_scene *scene);
+int				move_camera(t_scene *scene, int keycode);
+int				mouse_hook(int button,int x, int y, t_scene *scene);
 
 // ==== animation ====
 

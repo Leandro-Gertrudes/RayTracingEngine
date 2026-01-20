@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:44:29 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/20 14:31:22 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/20 17:04:38 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	ft_minirt(char	*file)
 	render_scene(scene);
 	mlx_key_hook(scene->disp.win, key_press, scene);
 	mlx_hook(scene->disp.win, 17, 1L << 17, close_window, scene);
+	mlx_mouse_hook(scene->disp.win, mouse_hook, scene);
 	if(g_mode == ANIMATE)
 		mlx_loop_hook(scene->disp.mlx, render_loop, scene);
 	mlx_loop(scene->disp.mlx);

@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 13:28:01 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/20 15:28:54 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/20 16:50:34 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	render_transition(t_scene *scene)
 	render_scene(scene);
 }
 
-static t_rgb	get_pixel(t_scene *scene, int x, int y)
+t_rgb	get_pixel(t_scene *scene, int x, int y)
 {
 	char	*src;
 	t_rgb	c;
