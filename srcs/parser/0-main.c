@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:44:29 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/20 17:04:38 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:27:37 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_mode	g_mode;
 int		startFrame;
 int		endFrame;
 bool	low_render = false;
+bool	g_edit = false;
 
 int	main(int argc, char **argv)
 {

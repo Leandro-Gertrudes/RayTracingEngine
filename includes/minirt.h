@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/20 17:06:12 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/21 16:11:57 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ extern t_mode 			g_mode;
 extern int				startFrame;
 extern int				endFrame;
 extern bool				low_render;
+extern bool				g_edit;
 
 
 enum e_event_mask
@@ -208,7 +209,6 @@ typedef struct s_image
 	t_rgb	*pixels;
 }	t_image;
 
-
 typedef struct s_scene
 {
 	t_ambient_light	*ambient;
@@ -222,6 +222,7 @@ typedef struct s_scene
 	t_anim_light	anim_light;
 	t_anim_camera	anim_camera;
 	t_image			*image;
+	t_obj_type		obj_edit;
 }	t_scene;
 
 typedef struct s_ray
@@ -413,6 +414,8 @@ void			ft_init_graphics(t_scene *scene);
 void			draw_hud(t_scene *scene);
 int				move_camera(t_scene *scene, int keycode);
 int				mouse_hook(int button,int x, int y, t_scene *scene);
+void			show_infos(t_scene *scene, t_obj_type type,
+					void *data, int x, int line_y);
 
 // ==== animation ====
 

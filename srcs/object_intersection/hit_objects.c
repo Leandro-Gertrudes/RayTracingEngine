@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit_objects_bonus.c                                :+:      :+:    :+:   */
+/*   hit_objects.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 15:39:35 by lgertrud          #+#    #+#             */
-/*   Updated: 2025/12/29 16:09:22 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/21 14:33:52 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static void	test_object(t_object *obj, t_ray ray, t_hit *hit)
 		&& hit_triangle(ray, (t_triangle *)obj->data, &t)
 		&& is_valid_t(t, hit->t))
 		update_hit(hit, t, obj, TRIANGLE);
-
 }
 
 bool	hit_objects(t_scene *scene, t_ray ray, t_hit *hit)
