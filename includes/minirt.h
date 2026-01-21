@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/21 16:11:57 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/21 17:40:50 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ extern int				startFrame;
 extern int				endFrame;
 extern bool				low_render;
 extern bool				g_edit;
+extern double			g_move;
 
 
 enum e_event_mask
@@ -222,7 +223,7 @@ typedef struct s_scene
 	t_anim_light	anim_light;
 	t_anim_camera	anim_camera;
 	t_image			*image;
-	t_obj_type		obj_edit;
+	t_object		obj_edit;
 }	t_scene;
 
 typedef struct s_ray
@@ -411,11 +412,6 @@ t_rgb			get_pixel(t_scene *scene, int x, int y);
 int				key_press(int keycode, t_scene *scene);
 int				close_window(t_scene *scene);
 void			ft_init_graphics(t_scene *scene);
-void			draw_hud(t_scene *scene);
-int				move_camera(t_scene *scene, int keycode);
-int				mouse_hook(int button,int x, int y, t_scene *scene);
-void			show_infos(t_scene *scene, t_obj_type type,
-					void *data, int x, int line_y);
 
 // ==== animation ====
 
@@ -432,5 +428,17 @@ void	save_image_ppm(t_image *img, char *filename);
 void	render_animation(t_scene *sc);
 t_image	*image_create(int width, int height);
 void	image_clear(t_image *img);
+
+
+// ==== edit ====
+
+void			move_obj(t_scene *scene, t_object *obj_edit, int keycode);
+void			draw_hud_obj(t_scene *scene, t_obj_type type, void *data);
+void			show_infos(t_scene *scene, t_obj_type type,
+					void *data, int x, int line_y);
+int				mouse_hook(int button,int x, int y, t_scene *scene);
+void			draw_hud(t_scene *scene);
+int				move_camera(t_scene *scene, int keycode);
+void 			update_move(int keycode);
 
 #endif
