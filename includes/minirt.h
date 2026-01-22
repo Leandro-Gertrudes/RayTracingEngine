@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/22 10:50:57 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/22 12:31:09 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -432,8 +432,12 @@ void	image_clear(t_image *img);
 
 // ==== edit ====
 
-void			move_obj(t_scene *scene, t_object *obj_edit, int keycode);
+void			edit_obj(t_scene *scene, t_object *obj_edit, int keycode);
+void			move_obj_xy(t_scene *scene, t_object *obj_edit, int keycode);
 void			move_obj_z(t_scene *scene, t_object *obj_edit, int button);
+void			move_obj_angule(t_scene *scene, t_object *obj_edit, int button);
+void			size_obj(t_scene *scene, t_object *obj_edit, int keycode);
+void 			reflectivity_update(t_scene *scene, t_object *obj_edit, int keycode);
 void			draw_hud_obj(t_scene *scene, t_obj_type type, void *data);
 void			show_infos(t_scene *scene, t_obj_type type,
 					void *data, int x, int line_y);

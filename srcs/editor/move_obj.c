@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 17:19:54 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/22 11:16:11 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/22 11:47:42 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void reflectivity_update(t_scene *scene, t_object *obj_edit, int keycode)
 
 	new = 0.0;
 
-	if(keycode == 105)
+	if(keycode == 111)
 		new += g_scale_edit;
-	else if (keycode == 111)
+	else if (keycode == 105)
 		new -= g_scale_edit;
 
 	if (obj_edit->type == SPHERE)
@@ -79,15 +79,11 @@ void reflectivity_update(t_scene *scene, t_object *obj_edit, int keycode)
 	draw_hud_obj(scene, obj_edit->type, obj_edit->data);
 }
 
-void	move_obj(t_scene *scene, t_object *obj_edit, int keycode)
+void	move_obj_xy(t_scene *scene, t_object *obj_edit, int keycode)
 {
 	double dx;
 	double dy;
 
-	
-	if(keycode == 105 || keycode == 111)
-		return (reflectivity_update(scene, obj_edit, keycode));
-	
 	get_move_delta(keycode, &dx, &dy);
 
 	if (dx == 0 && dy == 0)
