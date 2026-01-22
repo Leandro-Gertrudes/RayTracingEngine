@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/22 12:31:09 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/22 13:37:09 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ extern int				startFrame;
 extern int				endFrame;
 extern bool				low_render;
 extern bool				g_edit;
+extern bool				g_edit_color;
 extern double			g_scale_edit;
 
 
@@ -406,6 +407,7 @@ t_rgb			apply_specular(
 void			display_image(t_scene *scene);
 void			low_render_scene(t_scene *scene);
 void			render_transition(t_scene *scene);
+void			draw_bw_overlay(t_scene *scene, double strength);
 t_rgb			get_pixel(t_scene *scene, int x, int y);
 
 // ==== graphics ====
@@ -437,6 +439,7 @@ void			move_obj_xy(t_scene *scene, t_object *obj_edit, int keycode);
 void			move_obj_z(t_scene *scene, t_object *obj_edit, int button);
 void			move_obj_angule(t_scene *scene, t_object *obj_edit, int button);
 void			size_obj(t_scene *scene, t_object *obj_edit, int keycode);
+void			color_obj_edit(t_scene *scene, t_object *obj_edit, int keycode);
 void 			reflectivity_update(t_scene *scene, t_object *obj_edit, int keycode);
 void			draw_hud_obj(t_scene *scene, t_obj_type type, void *data);
 void			show_infos(t_scene *scene, t_obj_type type,

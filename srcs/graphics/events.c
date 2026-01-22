@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:42:38 by ghenriqu          #+#    #+#             */
-/*   Updated: 2026/01/22 11:20:13 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/22 13:38:51 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	key_press(int keycode, t_scene *scene)
 {
 	if (keycode == 65307) // ESC
 		return (close_window(scene));
+	if(g_edit_color)
+		return (0);
 
 	if (keycode == 32) // SPACE
 	{

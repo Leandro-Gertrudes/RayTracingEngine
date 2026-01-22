@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:57:06 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/22 10:54:35 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/22 14:35:33 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	*low_render_thread(void *arg)
 	t_rgb			color;
 
 	data = (t_thread_data *)arg;
-	step = 4; // <<< CONTROLA A QUALIDADE (4, 6, 8...)
+	step = 4;
 
 	y = data->y_start;
 	while (y < data->y_end)
@@ -78,7 +78,7 @@ void	*low_render_thread(void *arg)
 		{
 			color = low_compute_pixel_color(
 					data->scene,
-					make_ray(x, y, data->scene)); // <<< depth baixo
+					make_ray(x, y, data->scene));
 
 			dy = 0;
 			while (dy < step)

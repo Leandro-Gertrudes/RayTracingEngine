@@ -6,13 +6,11 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 13:28:01 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/20 16:50:34 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/22 13:13:46 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-void	draw_bw_overlay(t_scene *scene, double strength);
 
 void	render_transition(t_scene *scene)
 {
