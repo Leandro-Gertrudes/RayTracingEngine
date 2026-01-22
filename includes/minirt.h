@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/22 16:23:22 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:27:42 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -436,6 +436,7 @@ void	image_clear(t_image *img);
 
 void			edit_obj(t_scene *scene, t_object *obj_edit, int keycode);
 void			add_object(t_scene *scene, int keycode);
+void 			remove_obj(t_scene *scene);
 void			move_obj_xy(t_scene *scene, t_object *obj_edit, int keycode);
 void			move_obj_z(t_scene *scene, t_object *obj_edit, int button);
 void			move_obj_angule(t_scene *scene, t_object *obj_edit, int button);

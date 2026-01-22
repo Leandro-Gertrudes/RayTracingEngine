@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:03:57 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/22 16:16:59 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:27:06 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,15 @@ void	remove_object_at(t_scene *scene, int index)
 }
 
 
-int	find_object_index(t_scene *scene, t_object *obj)
+int	find_object_index(t_scene *scene, t_object *obj_edit)
 {
 	int	i;
 
 	i = 0;
 	while (i < scene->object_count)
 	{
-		if (scene->objects[i] == obj)
+		if (scene->objects[i]->data == obj_edit->data &&
+		    scene->objects[i]->type == obj_edit->type)
 			return (i);
 		i++;
 	}
@@ -65,21 +66,22 @@ int	find_object_index(t_scene *scene, t_object *obj)
 }
 
 
+
 void remove_obj(t_scene *scene)
 {
 	int index;
-	
+
 	if (!g_edit)
 		return ;
 
-	index = find_object_index(scene, scene->obj_edit);
+	index = find_object_index(scene, &scene->obj_edit);
 	if (index == -1)
 		return ;
+
 	remove_object_at(scene, index);
 
 	g_edit = false;
 
 	low_render_scene(scene);
 	draw_hud(scene);
-	
 }

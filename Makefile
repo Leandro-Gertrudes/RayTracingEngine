@@ -6,7 +6,7 @@
 #    By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/13 20:39:24 by ghenriqu          #+#    #+#              #
-#    Updated: 2026/01/22 16:22:08 by lgertrud         ###   ########.fr        #
+#    Updated: 2026/01/22 16:27:49 by lgertrud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,8 @@ SRC	=	$(SRC_DIR)/parser/0-main.c \
 			$(SRC_DIR)/editor/angule_obj.c  \
 			$(SRC_DIR)/editor/size_obj.c  \
 			$(SRC_DIR)/editor/color_obj.c  \
-			$(SRC_DIR)/editor/add_obj.c  
+			$(SRC_DIR)/editor/add_obj.c  \
+			$(SRC_DIR)/editor/remove_obj.c  
 
 OBJS        = $(SRC:.c=.o)
 OBJS_BONUS  = $(SRC_BONUS:.c=.o)
