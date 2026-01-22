@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 12:30:44 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/22 12:48:23 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:25:37 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ static void	scale_cylinder(t_cylinder *cy, int keycode)
 }
 
 
-void scale_triangle(t_object *obj_edit, int keycode)
+void scale_triangle(t_triangle *tr, int keycode)
 {
 	double s;
+	t_vec3 center;
 
 	if (keycode == 107)
 		s = 1.0 + g_scale_edit;
@@ -55,9 +56,6 @@ void scale_triangle(t_object *obj_edit, int keycode)
 
 	if (s <= 0.01)
 		return ;
-
-	t_triangle *tr = obj_edit->data;
-	t_vec3 center;
 
 	center = (t_vec3){
 		(tr->a.x + tr->b.x + tr->c.x) / 3.0,
@@ -72,6 +70,7 @@ void scale_triangle(t_object *obj_edit, int keycode)
 	tr->c = vec3_add(center,
 		vec3_scale(vec3_sub(tr->c, center), s));
 }
+
 
 void	size_obj(t_scene *scene, t_object *obj_edit, int keycode)
 {
@@ -89,7 +88,7 @@ void	size_obj(t_scene *scene, t_object *obj_edit, int keycode)
 	else if (obj_edit->type == CYLINDER)
 		scale_cylinder(obj_edit->data, keycode);
 	else if (obj_edit->type == TRIANGLE)
-		scale_triangle(obj_edit->data, keycode);
+		scale_triangle((t_triangle *)obj_edit->data, keycode);
 
 	low_render_scene(scene);
 	draw_hud_obj(scene, obj_edit->type, obj_edit->data);
