@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 14:22:04 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/22 16:28:41 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:41:44 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,6 +257,6 @@ void	edit_obj(t_scene *scene, t_object *obj_edit, int keycode)
 	else if (keycode == 105 || keycode == 111)
 		return (reflectivity_update(scene, obj_edit, keycode));
 	
-	else if (keycode == 121)
+	else if (keycode == 65288)
 		remove_obj(scene);
 }
