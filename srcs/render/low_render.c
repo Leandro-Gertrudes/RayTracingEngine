@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:57:06 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/20 16:58:29 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/22 10:54:35 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void	low_render_scene(t_scene *scene)
 void draw_hud(t_scene *scene)
 {
 	int x = 10, y = 10;
-	int w = 150, h = 220; 
+	int w = 185, h = 220; 
 	int alpha = 150;
 	t_rgb color;
 	char buf[128];
@@ -158,7 +158,7 @@ void draw_hud(t_scene *scene)
 		scene->disp.img, 0, 0);
 
 	int line_y = y + 15;
-	mlx_string_put(scene->disp.mlx, scene->disp.win, x + 10, line_y, 0xFFD700, "MiniRaytracer"); // título em dourado
+	mlx_string_put(scene->disp.mlx, scene->disp.win, x + 10, line_y, 0xFFD700, "MiniRaytracer");
 	line_y += 20;
 
 	snprintf(buf, sizeof(buf), "Mode: %s", ("PREVIEW"));

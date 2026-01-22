@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 14:22:04 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/21 17:42:44 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/22 10:52:06 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,14 @@ void	show_infos(t_scene *scene, t_obj_type type,
 			"Diameter: %.2f", sp->diameter);
 		mlx_string_put(scene->disp.mlx, scene->disp.win,
 			x + 10, line_y, 0xFFFFFF, buf);
+		line_y += 16;
+
+		snprintf(buf, sizeof(buf),
+			"Reflectivity: %.1f",
+			sp->reflectivity);
+		mlx_string_put(scene->disp.mlx, scene->disp.win,
+			x + 10, line_y, 0xFFFFFF, buf);
+		line_y += 16;
 	}
 	else if (type == PLANE)
 	{
@@ -90,6 +98,14 @@ void	show_infos(t_scene *scene, t_obj_type type,
 			pl->normal.x, pl->normal.y, pl->normal.z);
 		mlx_string_put(scene->disp.mlx, scene->disp.win,
 			x + 10, line_y, 0xFFFFFF, buf);
+		line_y += 16;
+
+		snprintf(buf, sizeof(buf),
+			"Reflectivity: %.1f",
+			pl->reflectivity);
+		mlx_string_put(scene->disp.mlx, scene->disp.win,
+			x + 10, line_y, 0xFFFFFF, buf);
+		line_y += 16;
 	}
 	else if (type == CYLINDER)
 	{
@@ -107,6 +123,15 @@ void	show_infos(t_scene *scene, t_obj_type type,
 			cy->height, cy->diameter);
 		mlx_string_put(scene->disp.mlx, scene->disp.win,
 			x + 10, line_y, 0xFFFFFF, buf);
+		line_y += 16;
+
+		snprintf(buf, sizeof(buf),
+			"Reflectivity: %.1f",
+			cy->reflectivity);
+		mlx_string_put(scene->disp.mlx, scene->disp.win,
+			x + 10, line_y, 0xFFFFFF, buf);
+		line_y += 16;
+
 	}
 	else if (type == TRIANGLE)
 	{
@@ -132,9 +157,16 @@ void	show_infos(t_scene *scene, t_obj_type type,
 		mlx_string_put(scene->disp.mlx, scene->disp.win,
 			x + 10, line_y, 0xFFFFFF, buf);
 		line_y += 16;
+		
+		snprintf(buf, sizeof(buf),
+			"Reflectivity: %.1f",
+			tr->reflectivity);
+		mlx_string_put(scene->disp.mlx, scene->disp.win,
+			x + 10, line_y, 0xFFFFFF, buf);
+		line_y += 16;
 	}
 	snprintf(buf, sizeof(buf),
-			"move speed : %.1f", g_move);
+			"Edit sensitivity : %.1f", g_scale_edit);
 	mlx_string_put(scene->disp.mlx, scene->disp.win,
 		x + 10, line_y + 16, 0xFFFFFF, buf);
 		
@@ -182,6 +214,12 @@ int	mouse_hook(int button,int x, int y, t_scene *scene)
 		scene->camera->fov -= 2;
 	if (button == 5) // scroll down
 		scene->camera->fov += 2;
+
+	if ((button == 4 || button == 5) && g_edit)
+	{
+		move_obj_z(scene, &scene->obj_edit, button);
+		return (0);
+	}
 
 	if (scene->camera->fov < 20)
 		scene->camera->fov = 20;

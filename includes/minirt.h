@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/21 17:40:50 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/22 10:50:57 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ extern int				startFrame;
 extern int				endFrame;
 extern bool				low_render;
 extern bool				g_edit;
-extern double			g_move;
+extern double			g_scale_edit;
 
 
 enum e_event_mask
@@ -433,6 +433,7 @@ void	image_clear(t_image *img);
 // ==== edit ====
 
 void			move_obj(t_scene *scene, t_object *obj_edit, int keycode);
+void			move_obj_z(t_scene *scene, t_object *obj_edit, int button);
 void			draw_hud_obj(t_scene *scene, t_obj_type type, void *data);
 void			show_infos(t_scene *scene, t_obj_type type,
 					void *data, int x, int line_y);
