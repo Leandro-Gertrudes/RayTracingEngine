@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 17:19:54 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/22 11:47:42 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/23 11:38:30 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,13 @@ void	move_obj_xy(t_scene *scene, t_object *obj_edit, int keycode)
 		tr->c.x += dx;
 		tr->c.y += dy;
 	}
+	else if (obj_edit->type == LIGHT)
+	{
+		t_light *l = obj_edit->data;
+
+		l->position.x += dx;
+		l->position.y += dy;
+	}
 
 	low_render_scene(scene);
 	draw_hud_obj(scene, obj_edit->type, obj_edit->data);
@@ -153,6 +160,13 @@ void	move_obj_z(t_scene *scene, t_object *obj_edit, int button)
 		tr->b.z += dz;
 		tr->c.z += dz;
 	}
+	else if (obj_edit->type == LIGHT)
+	{
+		t_light *l = obj_edit->data;
+
+		l->position.z += dz;
+	}
+	
 
 	low_render_scene(scene);
 	draw_hud_obj(scene, obj_edit->type, obj_edit->data);

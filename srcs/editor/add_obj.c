@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 15:34:27 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/22 16:22:28 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/23 12:28:32 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ t_object	*create_triangle(t_camera *cam)
 
 	t_vec3 pos = get_spawn_position(cam, 3.0);
 
-	// triângulo padrão 1x1
 	tr->a = pos;
 	tr->b = vec3_add(pos, (t_vec3){1, 0, 0});
 	tr->c = vec3_add(pos, (t_vec3){0, 1, 0});
@@ -101,6 +100,7 @@ void	add_object_to_scene(t_scene *scene, t_object *new_obj)
 
 
 
+
 void	add_object(t_scene *scene, int keycode)
 {
 	t_object *obj = NULL;
@@ -113,6 +113,8 @@ void	add_object(t_scene *scene, int keycode)
 		obj = create_cylinder(scene->camera);
 	else if (keycode == 51)
 		obj = create_triangle(scene->camera);
+	else if (keycode == 53)
+		return (add_light(scene));
 	else
 		return ;
 

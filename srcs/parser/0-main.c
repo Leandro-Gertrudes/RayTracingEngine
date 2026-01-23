@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:44:29 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/22 13:37:46 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/23 11:00:40 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		endFrame;
 bool	low_render = false;
 bool	g_edit = false;
 bool	g_edit_color = false;
+bool	g_edit_light = false;
 double	g_scale_edit = 0.3;
 
 int	main(int argc, char **argv)

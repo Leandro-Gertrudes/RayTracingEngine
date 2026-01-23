@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:03:57 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/22 16:27:06 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/23 12:55:56 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,12 @@ void remove_obj(t_scene *scene)
 
 	if (!g_edit)
 		return ;
+	
+	if(scene->obj_edit.type == LIGHT)
+	{
+		remove_light(scene);
+		return ;
+	}
 
 	index = find_object_index(scene, &scene->obj_edit);
 	if (index == -1)

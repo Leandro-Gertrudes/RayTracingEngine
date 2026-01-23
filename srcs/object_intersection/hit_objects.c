@@ -6,22 +6,11 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 15:39:35 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/21 14:33:52 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/23 10:59:48 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-bool hit_light(t_ray ray, t_light *l, double *t)
-{
-	double	radius = 5.0;
-	t_sphere fake;
-
-	fake.center = l->position;
-	fake.diameter = radius * 2;
-	return (hit_sphere(ray, &fake, t));
-}
-
 
 static void	update_hit(t_hit *hit, double t, t_object *obj, int type)
 {
@@ -30,14 +19,14 @@ static void	update_hit(t_hit *hit, double t, t_object *obj, int type)
 	hit->type = type;
 }
 
-static int	is_valid_t(double t, double current)
+int	is_valid_t(double t, double current)
 {
 	if (t > 1e-6 && t < current)
 		return (1);
 	return (0);
 }
 
-static void	test_object(t_object *obj, t_ray ray, t_hit *hit)
+static void	test_object(t_object *obj, t_ray ray, t_hit *hit, t_scene *scene)
 {
 	double	t;
 
@@ -57,6 +46,8 @@ static void	test_object(t_object *obj, t_ray ray, t_hit *hit)
 		&& hit_triangle(ray, (t_triangle *)obj->data, &t)
 		&& is_valid_t(t, hit->t))
 		update_hit(hit, t, obj, TRIANGLE);
+	if (low_render && g_edit_light)
+		low_light(scene, hit, ray, &t);
 }
 
 bool	hit_objects(t_scene *scene, t_ray ray, t_hit *hit)
@@ -70,8 +61,9 @@ bool	hit_objects(t_scene *scene, t_ray ray, t_hit *hit)
 	
 	while (i < scene->object_count)
 	{
-		test_object(scene->objects[i], ray, hit);
+		test_object(scene->objects[i], ray, hit, scene);
 		i++;
 	}
+
 	return (hit->object != NULL);
 }

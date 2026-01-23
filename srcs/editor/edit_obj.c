@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 14:22:04 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/22 16:41:44 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/23 12:42:30 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static const char *obj_type_to_str(t_obj_type type)
 		return ("CYLINDER");
 	if (type == TRIANGLE)
 		return ("TRIANGLE");
+	if (type == LIGHT)
+		return ("LIGHT");
 	return ("UNKNOWN");
 }
 
@@ -165,6 +167,32 @@ void	show_infos(t_scene *scene, t_obj_type type,
 			x + 10, line_y, 0xFFFFFF, buf);
 		line_y += 16;
 	}
+	else if (type == LIGHT)
+{
+	t_light *li = data;
+
+	snprintf(buf, sizeof(buf),
+		"Position: %.2f %.2f %.2f",
+		li->position.x, li->position.y, li->position.z);
+	mlx_string_put(scene->disp.mlx, scene->disp.win,
+		x + 10, line_y, 0xFFFFFF, buf);
+	line_y += 18;
+
+	snprintf(buf, sizeof(buf),
+		"Color: %d %d %d",
+		li->color.r, li->color.g, li->color.b);
+	mlx_string_put(scene->disp.mlx, scene->disp.win,
+		x + 10, line_y, 0xFFFFFF, buf);
+	line_y += 16;
+
+	snprintf(buf, sizeof(buf),
+		"Intensity: %.2f",
+		li->ratio);
+	mlx_string_put(scene->disp.mlx, scene->disp.win,
+		x + 10, line_y, 0xFFFFFF, buf);
+	line_y += 16;
+}
+
 	snprintf(buf, sizeof(buf),
 			"Edit sensitivity : %.1f", g_scale_edit);
 	mlx_string_put(scene->disp.mlx, scene->disp.win,
@@ -185,9 +213,9 @@ static int	click(int x, int y, t_scene *scene)
 	ray = make_ray(x, y, scene);
 	if (hit_objects(scene, ray, &hit))
 	{
-		low_render_scene(scene);
 		scene->obj_edit.data = hit.object;
 		scene->obj_edit.type = hit.type;
+		low_render_scene(scene);
 		draw_hud_obj(scene, hit.type, hit.object);
 		g_edit = true;
 	}
@@ -204,24 +232,22 @@ int	mouse_hook(int button,int x, int y, t_scene *scene)
 	(void)x;
 	(void)y;
 
-	if(g_edit_color)
-		return (0);
 	if (!low_render)
 		return (0);
 
 	if(button == 1)
 		return(click(x, y, scene));
-		
-	if (button == 4) // scroll up
-		scene->camera->fov -= 2;
-	if (button == 5) // scroll down
-		scene->camera->fov += 2;
-
+	
 	if ((button == 4 || button == 5) && g_edit)
 	{
 		move_obj_z(scene, &scene->obj_edit, button);
 		return (0);
 	}
+
+	if (button == 4) // scroll up
+		scene->camera->fov -= 2;
+	if (button == 5) // scroll down
+		scene->camera->fov += 2;
 
 	if (scene->camera->fov < 20)
 		scene->camera->fov = 20;
@@ -252,7 +278,6 @@ void	edit_obj(t_scene *scene, t_object *obj_edit, int keycode)
 
 	else if (keycode == 116)
 		color_obj_edit(scene, obj_edit, keycode);
-
 		
 	else if (keycode == 105 || keycode == 111)
 		return (reflectivity_update(scene, obj_edit, keycode));

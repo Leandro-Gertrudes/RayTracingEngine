@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:42:38 by ghenriqu          #+#    #+#             */
-/*   Updated: 2026/01/22 16:30:07 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/23 11:39:41 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,22 @@ int	key_press(int keycode, t_scene *scene)
 		update_move(keycode);
 		draw_hud_obj(scene, scene->obj_edit.type, scene->obj_edit.data);
 	}
+	if (low_render && keycode == 65505)
+	{
+		g_edit_light = !g_edit_light;
+		low_render_scene(scene);
+		return (0);
+	}
+
 	if(low_render && !g_edit)
 		move_camera(scene, keycode);
+		
 	if(low_render && g_edit)
 	 	edit_obj(scene, &scene->obj_edit, keycode);
+		
 	if(low_render && !g_edit)
 		add_object(scene, keycode);
+
 	return (0);
 }
 

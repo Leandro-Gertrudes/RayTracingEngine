@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/22 16:27:42 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/23 12:02:29 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ extern int				endFrame;
 extern bool				low_render;
 extern bool				g_edit;
 extern bool				g_edit_color;
+extern bool				g_edit_light;
 extern double			g_scale_edit;
 
 
@@ -159,6 +160,7 @@ typedef enum e_obj_type
 	PLANE,
 	CYLINDER,
 	TRIANGLE,
+	LIGHT,
 	INVALID
 }	t_obj_type;
 
@@ -442,6 +444,8 @@ void			move_obj_z(t_scene *scene, t_object *obj_edit, int button);
 void			move_obj_angule(t_scene *scene, t_object *obj_edit, int button);
 void			size_obj(t_scene *scene, t_object *obj_edit, int keycode);
 void			color_obj_edit(t_scene *scene, t_object *obj_edit, int keycode);
+void			add_light(t_scene *scene);
+void			remove_light(t_scene *scene);
 void 			reflectivity_update(t_scene *scene, t_object *obj_edit, int keycode);
 void			draw_hud_obj(t_scene *scene, t_obj_type type, void *data);
 void			show_infos(t_scene *scene, t_obj_type type,
@@ -450,5 +454,6 @@ int				mouse_hook(int button,int x, int y, t_scene *scene);
 void			draw_hud(t_scene *scene);
 int				move_camera(t_scene *scene, int keycode);
 void 			update_move(int keycode);
+void 			low_light(t_scene *scene, t_hit *hit, t_ray ray, double *t);
 
 #endif

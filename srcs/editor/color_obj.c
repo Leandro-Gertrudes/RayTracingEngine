@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:06:53 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/22 15:14:55 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/23 11:47:14 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	apply_color(t_object *obj, t_rgb color)
 		((t_cylinder *)obj->data)->color = color;
 	else if (obj->type == TRIANGLE)
 		((t_triangle *)obj->data)->color = color;
+	else if (obj->type == LIGHT)
+		((t_light *)obj->data)->color = color;
 }
 
 
