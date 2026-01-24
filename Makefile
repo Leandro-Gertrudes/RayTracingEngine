@@ -6,7 +6,7 @@
 #    By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/13 20:39:24 by ghenriqu          #+#    #+#              #
-#    Updated: 2026/01/24 14:15:39 by lgertrud         ###   ########.fr        #
+#    Updated: 2026/01/24 14:57:55 by lgertrud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,7 @@ SRC	=	$(SRC_DIR)/parser/0-main.c \
 			$(SRC_DIR)/editor/edit_light.c  \
 			$(SRC_DIR)/editor/hit_light.c  \
 			$(SRC_DIR)/editor/pos_light.c  \
+			$(SRC_DIR)/editor/save_scene.c  
 
 OBJS        = $(SRC:.c=.o)
 OBJS_BONUS  = $(SRC_BONUS:.c=.o)

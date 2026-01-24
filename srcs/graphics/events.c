@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:42:38 by ghenriqu          #+#    #+#             */
-/*   Updated: 2026/01/24 12:25:09 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/24 15:19:09 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	key_press(int keycode, t_scene *scene)
 		return (close_window(scene));
 	if(g_edit_color)
 		return (0);
-
+	if(keycode == 65509)
+		save_scene(scene);
 	if (keycode == 32) // SPACE
 	{
 		low_render = !low_render;

@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/24 14:15:59 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/24 15:12:29 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define MINIRT_BONUS_H
 
 # include "libft.h"
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdlib.h>
 # include <pthread.h>
 # include <stdbool.h>
 # include <math.h>
@@ -459,5 +462,6 @@ void 			update_move(int keycode);
 void 			low_light(t_scene *scene, t_hit *hit, t_ray ray, double *t);
 void			select_light(t_scene *scene, int keycode);
 void			position_light(t_scene *scene);
+void			save_scene(t_scene *scene);
 
 #endif
