@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:44:29 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/23 11:00:40 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/24 12:31:41 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ bool	low_render = false;
 bool	g_edit = false;
 bool	g_edit_color = false;
 bool	g_edit_light = false;
+t_light	*g_low_light = NULL;
 double	g_scale_edit = 0.3;
 
 int	main(int argc, char **argv)
@@ -64,7 +65,15 @@ void	ft_minirt(char	*file)
 		WIDTH / 2 - 60, HEIGHT / 2,
 		0xFFFFFF, "Loading...");
 	mlx_do_sync(scene->disp.mlx);
-	render_scene(scene);
+	
+	if(!low_render)
+		render_scene(scene);
+	else
+	{
+		if(scene->light_count > 0)
+			g_low_light = scene->lights[0];
+		low_render_scene(scene);
+	}
 	mlx_key_hook(scene->disp.win, key_press, scene);
 	mlx_hook(scene->disp.win, 17, 1L << 17, close_window, scene);
 	mlx_mouse_hook(scene->disp.win, mouse_hook, scene);

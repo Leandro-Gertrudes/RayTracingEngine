@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 12:30:44 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/22 16:25:37 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/24 13:05:39 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,17 @@ void	size_obj(t_scene *scene, t_object *obj_edit, int keycode)
 		scale_cylinder(obj_edit->data, keycode);
 	else if (obj_edit->type == TRIANGLE)
 		scale_triangle((t_triangle *)obj_edit->data, keycode);
+	else if (obj_edit->type == LIGHT)
+	{
+		t_light *l = obj_edit->data;
+		if (keycode == 106)
+			l->ratio -= g_scale_edit;
+		else
+			l->ratio +=  g_scale_edit;
+
+		if (l->ratio < 0.01)
+			l->ratio = 0.01;
+	}
 
 	low_render_scene(scene);
 	draw_hud_obj(scene, obj_edit->type, obj_edit->data);

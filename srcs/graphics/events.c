@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:42:38 by ghenriqu          #+#    #+#             */
-/*   Updated: 2026/01/23 11:39:41 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/24 12:25:09 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ int	key_press(int keycode, t_scene *scene)
 		low_render = !low_render;
 		
 		if (low_render)
+		{
+			if(scene->light_count > 0)
+				g_low_light = scene->lights[0];
 			low_render_scene(scene);
+		}
 		else
 		{
 			g_edit = false;

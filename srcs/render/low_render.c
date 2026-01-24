@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:57:06 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/23 13:14:19 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/24 12:50:59 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,24 @@ static t_rgb	get_object_color(t_hit *hit)
 		return (((t_triangle *)hit->object)->color);
 	return ((t_rgb){0, 0, 0});
 }
-t_vec3 get_light_position(t_scene *scene)
-{
-    int i;
+// t_vec3 get_light_position(t_scene *scene)
+// {
+//     int i;
 
-    if (scene->obj_edit.type == LIGHT && scene->obj_edit.data && g_edit)
-    {
-        t_light *l = scene->obj_edit.data;
-        return l->position;
-    }
+//     if (scene->obj_edit.type == LIGHT && scene->obj_edit.data && g_edit)
+//     {
+//         t_light *l = scene->obj_edit.data;
+//         return l->position;
+//     }
 
 
-    for (i = 0; i < scene->light_count; i++)
-    {
-        if (scene->lights[i])
-            return scene->lights[i]->position;
-    }
-    return (t_vec3){0, 0, 0};
-}
+//     for (i = 0; i < scene->light_count; i++)
+//     {
+//         if (scene->lights[i])
+//             return scene->lights[i]->position;
+//     }
+//     return (t_vec3){0, 0, 0};
+// }
 
 
 t_rgb	low_compute_pixel_color(t_scene *scene, t_ray ray)
@@ -52,34 +52,41 @@ t_rgb	low_compute_pixel_color(t_scene *scene, t_ray ray)
 	t_vec3	light_dir;
 	double	diff;
 	t_rgb	color;
-	t_vec3 	light_position;
+	t_rgb	ambient;
 
 	if (!hit_objects(scene, ray, &hit))
 		return ((t_rgb){0, 0, 0});
-	
+
 	if (hit.type == LIGHT)
 		return (((t_light *)hit.object)->color);
-		
+
 	point = vec3_add(ray.origin, vec3_scale(ray.direction, hit.t));
 	normal = get_normal(&hit, point);
 
-	light_position = get_light_position(scene);
+	color = get_object_color(&hit);
+
+	ambient.r = color.r * scene->ambient->ratio;
+	ambient.g = color.g * scene->ambient->ratio;
+	ambient.b = color.b * scene->ambient->ratio;
+
+	if (!g_low_light)
+		return (ambient);
 
 	light_dir = vec3_normalize(
-		vec3_sub(light_position, point)
+		vec3_sub(g_low_light->position, point)
 	);
 
 	diff = vec3_dot(normal, light_dir);
 	if (diff < 0)
 		diff = 0;
 
-	color = get_object_color(&hit);
-	color.r *= diff;
-	color.g *= diff;
-	color.b *= diff;
+	color.r = color.r * diff + ambient.r;
+	color.g = color.g * diff + ambient.g;
+	color.b = color.b * diff + ambient.b;
 
 	return (color);
 }
+
 
 void	*low_render_thread(void *arg)
 {

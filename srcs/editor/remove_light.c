@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 11:59:01 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/23 13:05:36 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/24 12:38:30 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ void	remove_light(t_scene *scene)
 		return ;
 
 	remove_light_at(scene, index);
+	
+	if(scene->light_count > 0)
+		g_low_light = scene->lights[0];
+	else
+		g_low_light = NULL;
 
 	g_edit = false;
 

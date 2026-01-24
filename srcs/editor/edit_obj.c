@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 14:22:04 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/23 12:42:30 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/24 13:17:10 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,6 +215,8 @@ static int	click(int x, int y, t_scene *scene)
 	{
 		scene->obj_edit.data = hit.object;
 		scene->obj_edit.type = hit.type;
+		if(hit.type == LIGHT)
+			g_low_light = hit.object;
 		low_render_scene(scene);
 		draw_hud_obj(scene, hit.type, hit.object);
 		g_edit = true;
@@ -263,7 +265,7 @@ int	mouse_hook(int button,int x, int y, t_scene *scene)
 
 void	edit_obj(t_scene *scene, t_object *obj_edit, int keycode)
 {
-	//printf("%d\n", keycode);
+	printf("%d\n", keycode);
 	if (keycode == 119 || keycode == 115 || keycode == 97
 			|| keycode == 100)
 		return (move_obj_xy(scene, obj_edit, keycode));
@@ -281,6 +283,9 @@ void	edit_obj(t_scene *scene, t_object *obj_edit, int keycode)
 		
 	else if (keycode == 105 || keycode == 111)
 		return (reflectivity_update(scene, obj_edit, keycode));
+
+	else if(g_edit_light && (keycode == 65105 || keycode == 91))
+		select_light(scene, keycode);
 	
 	else if (keycode == 65288)
 		remove_obj(scene);

@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/23 12:02:29 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/24 13:15:05 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ typedef struct s_light
 	double	ratio;
 	t_rgb	color;
 }	t_light;
+
+extern t_light			*g_low_light;
 
 typedef struct s_sphere
 {
@@ -455,5 +457,6 @@ void			draw_hud(t_scene *scene);
 int				move_camera(t_scene *scene, int keycode);
 void 			update_move(int keycode);
 void 			low_light(t_scene *scene, t_hit *hit, t_ray ray, double *t);
+void			select_light(t_scene *scene, int keycode);
 
 #endif
