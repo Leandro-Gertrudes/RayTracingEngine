@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 14:22:04 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/24 13:17:10 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/24 14:20:11 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,8 @@ static int	click(int x, int y, t_scene *scene)
 	t_ray	ray;
 	t_hit	hit;
 
+	if(g_edit_color)
+		return (0);
 	ray = make_ray(x, y, scene);
 	if (hit_objects(scene, ray, &hit))
 	{
@@ -284,7 +286,7 @@ void	edit_obj(t_scene *scene, t_object *obj_edit, int keycode)
 	else if (keycode == 105 || keycode == 111)
 		return (reflectivity_update(scene, obj_edit, keycode));
 
-	else if(g_edit_light && (keycode == 65105 || keycode == 91))
+	else if(g_edit_light && (keycode == 65105 || keycode == 91 || keycode == 112))
 		select_light(scene, keycode);
 	
 	else if (keycode == 65288)

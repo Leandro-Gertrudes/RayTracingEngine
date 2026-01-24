@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/24 13:15:05 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/24 14:15:59 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -458,5 +458,6 @@ int				move_camera(t_scene *scene, int keycode);
 void 			update_move(int keycode);
 void 			low_light(t_scene *scene, t_hit *hit, t_ray ray, double *t);
 void			select_light(t_scene *scene, int keycode);
+void			position_light(t_scene *scene);
 
 #endif
