@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:06:53 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/23 11:47:14 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/24 14:40:58 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,26 +118,15 @@ void	render_color_prompt(t_scene *scene)
 	mlx_do_sync(scene->disp.mlx);
 }
 
-
-void *color_input_thread(void *arg)
+void	color_obj_edit(t_scene *scene, t_object *obj_edit, int keycode)
 {
-	t_scene *scene = arg;
-
+	(void)keycode;
+	g_edit_color = true;
 	render_color_prompt(scene);
 	request_color_from_terminal(scene);
 	low_render_scene(scene);
 	draw_hud_obj(scene, scene->obj_edit.type, scene->obj_edit.data);
 	mlx_do_sync(scene->disp.mlx);
 	g_edit_color = false;
-	return NULL;
-}
-
-
-void	color_obj_edit(t_scene *scene, t_object *obj_edit, int keycode)
-{
-	pthread_t tid;
-	(void)keycode;
-	g_edit_color = true;
-	pthread_create(&tid, NULL, color_input_thread, scene);
 	(void)obj_edit;
 }
