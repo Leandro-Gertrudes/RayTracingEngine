@@ -6,13 +6,168 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:11:15 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/18 16:11:37 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:50:10 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/* caida da esfera
+//chuva de objetos.====================
+
+// double	rand01(void)
+// {
+// 	return ((double)rand() / (double)RAND_MAX);
+// }
+
+// double triangle_min_y(t_triangle *tr)
+// {
+// 	double min = tr->a.y;
+// 	if (tr->b.y < min) min = tr->b.y;
+// 	if (tr->c.y < min) min = tr->c.y;
+// 	return min;
+// }
+
+// void move_triangle_y(t_triangle *tr, double dy)
+// {
+// 	tr->a.y += dy;
+// 	tr->b.y += dy;
+// 	tr->c.y += dy;
+// }
+
+// void init_rain(t_scene *sc)
+// {
+// 	for (int i = 0; i < sc->object_count; i++)
+// 	{
+// 		t_anim_body *a = &sc->anim[i];
+
+// 		a->type = sc->objects[i]->type;
+// 		a->obj = sc->objects[i]->data;
+
+// 		a->vy = 0.0;
+// 		a->restitution = 0.2 + rand01() * 0.2;
+// 		a->tilt = 0.0;
+// 		a->tilt_speed = 0.0;
+// 		a->active = 1;
+
+// 		if (a->type == SPHERE)
+// 			((t_sphere *)a->obj)->center.y = 8.0 + rand01() * 6.0;
+
+// 		else if (a->type == CYLINDER)
+// 			((t_cylinder *)a->obj)->center.y = 9.0 + rand01() * 6.0;
+
+// 		else if (a->type == TRIANGLE)
+// 			move_triangle_y(a->obj, 10.0 + rand01() * 6.0);
+// 	}
+// }
+
+
+// void update_rain(t_scene *sc)
+// {
+// 	double g = 9.8;
+// 	double dt = sc->time.delta;
+// 	double ground = -0.5;
+
+// 	for (int i = 0; i < sc->object_count; i++)
+// 	{
+// 		t_anim_body *a = &sc->anim[i];
+// 		if (!a->active)
+// 			continue;
+
+// 		// gravidade
+// 		a->vy -= g * dt;
+
+// 		/* ================= ESFERA ================= */
+// 		if (a->type == SPHERE)
+// 		{
+// 			t_sphere *sp = a->obj;
+
+// 			sp->center.y += a->vy * dt;
+
+// 			if (sp->center.y <= ground + sp->diameter / 2)
+// 			{
+// 				sp->center.y = ground + sp->diameter / 2;
+// 				a->vy = -a->vy * a->restitution;
+
+// 				if (fabs(a->vy) < 0.2)
+// 				{
+// 					a->vy = 0;
+// 					a->active = 0;
+// 				}
+// 			}
+// 		}
+
+// 		/* ================= CILINDRO ================= */
+// 		else if (a->type == CYLINDER)
+// 		{
+// 			t_cylinder *cy = a->obj;
+// 			double half_h = cy->height * 0.5;
+
+// 			cy->center.y += a->vy * dt;
+
+// 			if (cy->center.y <= ground + half_h)
+// 			{
+// 				cy->center.y = ground + half_h;
+// 				a->vy = -a->vy * a->restitution;
+
+// 				// torque visual (efeito prato)
+// 				a->tilt_speed += (rand01() - 0.5) * 3.0;
+// 			}
+
+// 			// aplica inclinação fake
+// 			a->tilt += a->tilt_speed * dt;
+// 			a->tilt_speed *= 0.97;
+
+// 			cy->normal = vec3_normalize((t_vec3){
+// 				sin(a->tilt),
+// 				1.0,
+// 				cos(a->tilt)
+// 			});
+
+// 			if (fabs(a->vy) < 0.2 && fabs(a->tilt_speed) < 0.05)
+// 			{
+// 				a->active = 0;
+// 				a->vy = 0;
+// 			}
+// 		}
+
+// 		/* ================= TRIÂNGULO ================= */
+//         else if (a->type == TRIANGLE)
+//         {
+//             t_triangle *tr = a->obj;
+
+//             // gravidade
+//             move_triangle_y(tr, a->vy * dt);
+
+//             double min_y = triangle_min_y(tr);
+
+//             if (min_y <= ground)
+//             {
+//                 move_triangle_y(tr, ground - min_y);
+
+//                 a->vy = -a->vy * a->restitution;
+//                 a->vy *= 0.6;
+
+//                 // rotação fake só no impacto
+//                 double r = (rand01() - 0.5) * 0.2;
+//                 tr->a.x += r; tr->a.z -= r;
+//                 tr->b.x -= r; tr->b.z += r;
+//                 tr->c.x += r * 0.5;
+//             }
+
+//             if (fabs(a->vy) < 0.15)
+//             {
+//                 a->vy = 0;
+//                 a->active = 0;
+//             }
+//         }
+// 	}
+// }
+
+
+
+
+
+/* caida da esfera=====================
 static double velocity = 0.0;
 
 void update_falling_sphere(t_scene *sc)
@@ -70,4 +225,69 @@ void update_anim_spheres(t_scene *sc)
 			sp->center.z = z;
 		}
 	}
+}
+
+static int phase = 0;
+static double cue_speed = 8.0;
+
+static t_vec3 vel[6];
+static int impulse_done = 0;
+
+
+void update_billiard(t_scene *sc)
+{
+    double dt = 3.0 / 24.0;
+    double center_x = 4.2;
+
+    t_sphere *cue;
+    cue = (t_sphere *)sc->objects[7]->data; // bola branca
+
+    // ===== FASE 0 — AVANÇO =====
+    if (phase == 0)
+    {
+        cue->center.z += cue_speed * dt;
+
+        if (cue->center.z >= 4.7)
+        {
+            cue_speed = 0.0;
+            phase = 2;
+        }
+    }
+
+    // ===== FASE 2 — ESPALHAMENTO =====
+    else if (phase == 2)
+    {
+        // aplica impulso UMA VEZ
+        if (!impulse_done)
+        {
+            for (int i = 0; i <= 6; i++)
+            {
+                t_sphere *sp = (t_sphere *)sc->objects[i]->data;
+
+                double dx = sp->center.x - center_x;
+
+                vel[i].x = dx * 1.8;
+                vel[i].z = fmax(0.8, 3.5 - fabs(dx));
+                vel[i].y = 0.0;
+            }
+            impulse_done = 1;
+        }
+
+        // integra movimento
+        for (int i = 0; i <= 6; i++)
+        {
+            t_sphere *sp = (t_sphere *)sc->objects[i]->data;
+
+            sp->center.x += vel[i].x * dt;
+            sp->center.z += vel[i].z * dt;
+
+            // atrito
+            vel[i].x *= 0.96;
+            vel[i].z *= 0.96;
+        }
+
+        // bola branca perde energia
+        cue->center.z += 0.4 * dt;
+    }
+
 }

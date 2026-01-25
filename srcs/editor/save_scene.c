@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 14:57:31 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/24 15:34:28 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/25 15:43:49 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,18 @@ void	write_sphere(int fd, t_object *sp)
 		o->reflectivity);
 }
 
+void	write_triangle(int fd, t_object *tr)
+{
+	t_triangle *o = tr->data;
+
+	dprintf(fd, "tr %.2f,%.2f,%.2f %.2f,%.2f,%.2f %.2f,%.2f,%.2f %d,%d,%d %f\n",
+		o->a.x, o->a.y, o->a.z,
+		o->b.x, o->b.y, o->b.z,
+		o->c.x, o->c.y, o->c.z,
+		o->color.r, o->color.g, o->color.b,
+		o->reflectivity);
+}
+
 void	write_objects(int fd, t_scene *scene)
 {
 	int	i;
@@ -84,6 +96,8 @@ void	write_objects(int fd, t_scene *scene)
 				write_plane(fd, scene->objects[i]);
 			else if (scene->objects[i]->type == CYLINDER)
 				write_cylinder(fd, scene->objects[i]);
+			else if (scene->objects[i]->type == TRIANGLE)
+				write_triangle(fd, scene->objects[i]);
 		}
 		i++;
 	}

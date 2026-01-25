@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:57:06 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/24 12:50:59 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:49:21 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,15 @@ void	*low_render_thread(void *arg)
 				while (dx < step)
 				{
 					if (x + dx < WIDTH && y + dy < HEIGHT)
+					{
+
+					if (g_mode == SAVE_FRAMES)
+							image_put_pixel(data->scene->image, x, y, color);
+					else
 						put_pixel(data->scene,
 							x + dx, y + dy,
 							rgb_to_int(color));
+					}
 					dx++;
 				}
 				dy++;
@@ -159,7 +165,8 @@ void	low_render_scene(t_scene *scene)
 		i++;
 	}
 	display_image(scene);
-	draw_hud(scene);
+	if(g_mode != SAVE_FRAMES)
+		draw_hud(scene);
 }
 
 void draw_hud(t_scene *scene)

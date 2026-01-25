@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3.5-parser_l.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 16:30:56 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/12/14 16:32:44 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2026/01/25 13:33:57 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	is_valid_light_line(char *line)
 	if (!args || !args[0] || !args[1] || !args[2] || !args[3]
 		|| ft_strncmp(args[0], "L", ft_strlen(args[0])) != 0
 		|| !ft_parser_vec3(args[1])
-		|| !ft_parser_ratio(args[2], 0, 1)
+		|| !ft_parser_ratio(args[2], 0, 10)
 		|| !ft_parser_rgb(args[3]))
 	{
 		ft_free_split(args);

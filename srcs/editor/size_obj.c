@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 12:30:44 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/24 13:05:39 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/24 16:59:49 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ static void	scale_cylinder(t_cylinder *cy, int keycode)
 	if (keycode == 106 || keycode == 107)
 	{
 		s = (keycode == 107)
-			? 1.0 + g_scale_edit
-			: 1.0 - g_scale_edit;
+			? 1.0 * g_scale_edit
+			: -1.0 * g_scale_edit;
 
-		cy->diameter *= s;
+		cy->diameter += s;
 		if (cy->diameter < 0.01)
 			cy->diameter = 0.01;
 	}
 	else
 	{
 		s = (keycode == 109)
-			? 1.0 + g_scale_edit
-			: 1.0 - g_scale_edit;
+			?  1 * g_scale_edit
+			: -1 - g_scale_edit;
 
-		cy->height *= s;
+		cy->height += s;
 		if (cy->height < 0.01)
 			cy->height = 0.01;
 	}

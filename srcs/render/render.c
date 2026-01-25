@@ -6,15 +6,13 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 18:48:20 by ghenriqu          #+#    #+#             */
-/*   Updated: 2026/01/20 14:45:34 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:20:09 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #define DEPTH 3
 #define TEST_REFLECTIVITY 0.5
-
-void	image_put_pixel(t_image *img, int x, int y, t_rgb color);
 
 t_rgb apply_specular(
     t_vec3 normal,

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   3-parser_bonus.c                                   :+:      :+:    :+:   */
+/*   3-parser.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 12:38:39 by lgertrud          #+#    #+#             */
-/*   Updated: 2025/12/29 18:52:11 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:50:34 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ t_scene	*ft_parser(t_args *args)
 		ft_exit(ERROR_SCENE, 2);
 	}
 	scene->camera->camdata = ft_compute_camera(*scene->camera, WIDTH, HEIGHT);
-	init_anim_light(scene);
-	init_anim_camera(scene);
+	//init_anim_light(scene);
+	//init_anim_camera(scene);
 	scene->image = image_create(WIDTH, HEIGHT);
 	return (scene);
 }

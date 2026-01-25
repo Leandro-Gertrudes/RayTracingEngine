@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:05:20 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/18 16:15:09 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:52:17 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ void	render_animation(t_scene *sc)
 	frame = startFrame;
 	while (frame <= endFrame)
 	{
-		sc->time.current = frame * (1.0 / 24.0);
+		//sc->time.current = frame * (1.0 / 24.0);
+		update_time(sc);
 
-		update_anim_light(sc);
+		//update_rain(sc);
+		//update_billiard(sc);
+		//update_anim_light(sc);
 		//update_anim_camera(sc);
 		//update_falling_sphere(sc);
 		//update_anim_spheres(sc);
@@ -34,7 +37,11 @@ void	render_animation(t_scene *sc)
 		);
 
 		image_clear(sc->image);
-		render_scene(sc);
+
+		if(low_render)
+			low_render_scene(sc);
+		else
+			render_scene(sc);
 
 		sprintf(name, "frames/frame_%04d.ppm", frame);
 		save_image_ppm(sc->image, name);
@@ -114,14 +121,19 @@ int	render_loop(void *param)
 
 	sc = (t_scene *)param;
 	update_scene(sc);
-	render_scene(sc);
+	if(low_render)
+		low_render_scene(sc);
+	else
+		render_scene(sc);
 	return (0);
 }
 
 void	update_scene(t_scene *sc)
 {
 	update_time(sc);
-	update_anim_light(sc);
+	//update_billiard(sc);
+	//update_rain(sc);
+	//update_anim_light(sc);
 	//update_anim_camera(sc);
 
 	sc->camera->camdata = ft_compute_camera(

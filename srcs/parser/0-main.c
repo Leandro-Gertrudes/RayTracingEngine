@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:44:29 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/24 12:31:41 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:24:50 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,30 @@ double	g_scale_edit = 0.3;
 
 int	main(int argc, char **argv)
 {
-    if (argc < 2 || argc > 5 || ft_is_rt(argv[1]))
+	int	i;
+
+	if (argc < 2 || argc > 6 || ft_is_rt(argv[1]))
 		ft_exit(ERROR_PARAM, 1);
 
-    if (argc == 2)
-        g_mode = DEFAULT;
-    else if (!ft_strcmp(argv[2], "--animate"))
-        g_mode = ANIMATE;
-    else if (!ft_strcmp(argv[2], "--frames"))
+	i = 0;
+	if (argc > 2 && !ft_strcmp(argv[2], "--lowRender"))
 	{
-		if(!argv[3] ||  !argv[4] ||
-				!ft_is_number(argv[3]) || !ft_is_number(argv[4]))
+		low_render = true;
+		i++;
+	}
+
+	if (argc == 2 || (argc == 3 && i == 1))
+		g_mode = DEFAULT;
+	else if (!ft_strcmp(argv[2 + i], "--animate"))
+		g_mode = ANIMATE;
+	else if (!ft_strcmp(argv[2 + i], "--frames"))
+	{
+		if(!argv[3 + i] ||  !argv[4 + i] ||
+				!ft_is_number(argv[3 + i]) || !ft_is_number(argv[4 + i]))
 			ft_exit(ERROR_FRAMES, 1);
-        g_mode = SAVE_FRAMES;
-		startFrame = atoi(argv[3]);
-		endFrame = atoi(argv[4]);
+		g_mode = SAVE_FRAMES;
+		startFrame = atoi(argv[3 + i]);
+		endFrame = atoi(argv[4 + i]);
 	}
 	else
 		ft_exit(ERROR_PARAM, 1);
