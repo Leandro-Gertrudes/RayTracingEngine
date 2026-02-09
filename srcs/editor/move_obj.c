@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 17:19:54 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/23 11:38:30 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/09 16:29:45 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	move_obj_xy(t_scene *scene, t_object *obj_edit, int keycode)
 
 void	move_obj_z(t_scene *scene, t_object *obj_edit, int button)
 {
-	double dz = 0.3;
+	double dz = g_scale_edit;
 
 	if (button == 5)
 		dz = -dz;
