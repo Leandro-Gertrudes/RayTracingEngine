@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 10:33:54 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/11 14:48:26 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/11 15:04:33 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,30 @@ void	start_render_from_menu(t_menu *m)
 
 	ft_minirt(fullpath);
 }
+#define MENU_WIDTH 900
+#define MENU_HEIGHT 600
+#define BG_COLOR 0x1A1A2E
+#define PRIMARY_COLOR 0x16213E
+#define ACCENT_COLOR 0x0F3460
+#define HIGHLIGHT_COLOR 0x00D9FF
+#define TEXT_COLOR 0xE8E8E8
+#define SECONDARY_TEXT 0x8B8B8B
+#define SUCCESS_COLOR 0x00FF88
+#define WARNING_COLOR 0xFFAA00
+
+
+
+static void	draw_header(t_menu *m)
+{
+	mlx_string_put(m->mlx, m->win, 50, 25, HIGHLIGHT_COLOR,
+		"  __  __ _       _ ____ _____");
+	mlx_string_put(m->mlx, m->win, 50, 40, HIGHLIGHT_COLOR,
+		" |  \\/  (_)_ __ (_)  _ \\_   _|");
+	mlx_string_put(m->mlx, m->win, 50, 55, HIGHLIGHT_COLOR,
+		" | |\\/| | | '_ \\| | |_) || |");
+	mlx_string_put(m->mlx, m->win, 50, 70, HIGHLIGHT_COLOR,
+		" |_|  |_|_|_| |_|_|__|\\_\\ |_|");
+}
 
 
 int	menu_render(t_menu *m)
@@ -60,8 +84,7 @@ int	menu_render(t_menu *m)
 	int	start;
 	int	end;
 
-	mlx_clear_window(m->mlx, m->win);
-	mlx_string_put(m->mlx, m->win, 250, 30, 0xFFFFFF, "miniRT");
+	draw_header(m);
 
 	start = m->current_page * m->scenes_per_page;
 	end = start + m->scenes_per_page;
