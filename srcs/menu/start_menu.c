@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 10:33:54 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/11 15:04:33 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/11 15:12:33 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	start_render_from_menu(t_menu *m)
 	if (m->mode_selected == 0)
 		g_mode = DEFAULT;
 	else if (m->mode_selected == 1)
-		g_mode = ANIMATE;
+		low_render = true;
 	else
 	{
 		g_mode = SAVE_FRAMES;
@@ -52,29 +52,16 @@ void	start_render_from_menu(t_menu *m)
 
 	ft_minirt(fullpath);
 }
-#define MENU_WIDTH 900
-#define MENU_HEIGHT 600
-#define BG_COLOR 0x1A1A2E
-#define PRIMARY_COLOR 0x16213E
-#define ACCENT_COLOR 0x0F3460
-#define HIGHLIGHT_COLOR 0x00D9FF
-#define TEXT_COLOR 0xE8E8E8
-#define SECONDARY_TEXT 0x8B8B8B
-#define SUCCESS_COLOR 0x00FF88
-#define WARNING_COLOR 0xFFAA00
-
-
-
 static void	draw_header(t_menu *m)
 {
-	mlx_string_put(m->mlx, m->win, 50, 25, HIGHLIGHT_COLOR,
+	mlx_string_put(m->mlx, m->win, 50, 25, 0xFFFFF,
 		"  __  __ _       _ ____ _____");
-	mlx_string_put(m->mlx, m->win, 50, 40, HIGHLIGHT_COLOR,
+	mlx_string_put(m->mlx, m->win, 50, 40, 0xFFFFF,
 		" |  \\/  (_)_ __ (_)  _ \\_   _|");
-	mlx_string_put(m->mlx, m->win, 50, 55, HIGHLIGHT_COLOR,
+	mlx_string_put(m->mlx, m->win, 50, 55, 0xFFFFF,
 		" | |\\/| | | '_ \\| | |_) || |");
-	mlx_string_put(m->mlx, m->win, 50, 70, HIGHLIGHT_COLOR,
-		" |_|  |_|_|_| |_|_|__|\\_\\ |_|");
+	mlx_string_put(m->mlx, m->win, 50, 70, 0xFFFFF,
+		" |_|  |_|_|_| |_|_|__|\\_\\|_|");
 }
 
 
@@ -84,6 +71,7 @@ int	menu_render(t_menu *m)
 	int	start;
 	int	end;
 
+	mlx_clear_window(m->mlx, m->win);
 	draw_header(m);
 
 	start = m->current_page * m->scenes_per_page;
@@ -118,12 +106,12 @@ int	menu_render(t_menu *m)
 	mlx_string_put(m->mlx, m->win, 280, 325, 0xAAAAAA, "< >");
 	
 	// MODE
-	mlx_string_put(m->mlx, m->win, 505, 360, 0xFFFFFF, "MODE (+ / -)");
+	mlx_string_put(m->mlx, m->win, 505, 360, 0xFFFFFF, "MODE (- / +)");
 
 	mlx_string_put(m->mlx, m->win, 490, 380,
 		m->mode_selected == 0 ? 0x00FF00 : 0xFFFFFF, "DEFAULT");
 	mlx_string_put(m->mlx, m->win, 540, 380,
-		m->mode_selected == 1 ? 0x00FF00 : 0xFFFFFF, "ANIMATE");
+		m->mode_selected == 1 ? 0x00FF00 : 0xFFFFFF, "EDIT");
 
 	return (0);
 }
