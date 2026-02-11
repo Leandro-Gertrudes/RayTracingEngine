@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/25 16:53:08 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/11 14:48:16 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <pthread.h>
 # include <stdbool.h>
 # include <math.h>
+# include <dirent.h>
+# include <stdlib.h>
+# include <string.h>
 # include "../minilibx-linux/mlx.h"
 # include "../X11/X.h"
 # include "../X11/keysym.h"
@@ -42,8 +45,17 @@
 # define DESTROYNOTIFY   17
 # define EXPOSE          12
 
+#define KEY_ESQ		65307
+#define KEY_UP		65362
+#define KEY_DOWN	65364
+#define KEY_LEFT	65361
+#define KEY_RIGHT	65363
+#define KEY_ENTER	65293
+#define KEY_PLUS	61
+#define KEY_MINUS	45
+
 typedef enum e_mode {
-    DEFAULT,
+	DEFAULT,
     ANIMATE,
     SAVE_FRAMES
 } t_mode;
@@ -320,6 +332,25 @@ typedef struct s_thread_data
 	int		y_end;
 }	t_thread_data;
 
+//menu
+typedef struct s_menu
+{
+	void	*mlx;
+	void	*win;
+
+	char	**scenes;
+	int		scene_count;
+
+	int		scene_selected;
+
+	int		current_page;
+	int		scenes_per_page;
+
+	int		mode_selected;
+}	t_menu;
+
+
+
 void	ft_minirt(char	*file);
 
 // ============ Parser ============
@@ -468,5 +499,10 @@ void 	low_light(t_scene *scene, t_hit *hit, t_ray ray, double *t);
 void	select_light(t_scene *scene, int keycode);
 void	position_light(t_scene *scene);
 void	save_scene(t_scene *scene);
+
+// ==== menu ====
+
+void	menu(void);
+char	**load_scenes(char *path, int *scene_count);
 
 #endif
