@@ -6,11 +6,13 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:05:20 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/25 16:52:17 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/09 16:48:44 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void update_diamond_rotation(t_scene *sc);
 
 void	render_animation(t_scene *sc)
 {
@@ -23,6 +25,7 @@ void	render_animation(t_scene *sc)
 		//sc->time.current = frame * (1.0 / 24.0);
 		update_time(sc);
 
+		update_diamond_rotation(sc);
 		//update_rain(sc);
 		//update_billiard(sc);
 		//update_anim_light(sc);
@@ -131,6 +134,7 @@ int	render_loop(void *param)
 void	update_scene(t_scene *sc)
 {
 	update_time(sc);
+	update_diamond_rotation(sc);
 	//update_billiard(sc);
 	//update_rain(sc);
 	//update_anim_light(sc);
