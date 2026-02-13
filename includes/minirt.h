@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/11 14:48:16 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/13 09:08:37 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,15 @@
 # define DESTROYNOTIFY   17
 # define EXPOSE          12
 
-#define KEY_ESQ		65307
-#define KEY_UP		65362
-#define KEY_DOWN	65364
-#define KEY_LEFT	65361
-#define KEY_RIGHT	65363
-#define KEY_ENTER	65293
-#define KEY_PLUS	61
-#define KEY_MINUS	45
+#define KEY_ESQ			65307
+#define KEY_UP			65362
+#define KEY_DOWN		65364
+#define KEY_LEFT		65361
+#define KEY_RIGHT		65363
+#define KEY_ENTER		65293
+#define KEY_LEFT_ENTER	65421
+#define KEY_PLUS		61
+#define KEY_MINUS		45
 
 typedef enum e_mode {
 	DEFAULT,

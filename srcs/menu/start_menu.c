@@ -6,11 +6,13 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 10:33:54 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/11 15:12:33 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/13 09:08:57 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int	enter_blocked = 1;
 
 void	free_menu(t_menu *m)
 {
@@ -143,9 +145,16 @@ int	menu_key_hook(int key, t_menu *m)
 		m->mode_selected++;
 	else if (key == KEY_MINUS && m->mode_selected > 0)
 		m->mode_selected--;
-	else if (key == KEY_ENTER)
+	else if (key == KEY_ENTER || key == KEY_LEFT_ENTER)
+	{
+		if (enter_blocked)
+		{
+			enter_blocked = 0;
+			return (0);
+		}
 		start_render_from_menu(m);
-	
+	}
+		
 	if (key == KEY_ESQ) // ESC
 	{
 		mlx_loop_end(m->mlx);
