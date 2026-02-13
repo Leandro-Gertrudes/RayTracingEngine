@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:42:38 by ghenriqu          #+#    #+#             */
-/*   Updated: 2026/02/11 10:48:09 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/13 10:27:56 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,26 @@ int	close_window(t_scene *scene)
 
 int	key_press(int keycode, t_scene *scene)
 {
-	if (keycode == 65307) // ESC
+	if (keycode == KEY_ESQ)
 		return (close_window(scene));
+	
+	if(keycode == KEY_F1)
+	{
+		mlx_destroy_image(scene->disp.mlx, scene->disp.img);
+		mlx_destroy_window(scene->disp.mlx, scene->disp.win);
+		mlx_loop_end(scene->disp.mlx);
+		mlx_destroy_display(scene->disp.mlx);
+		free(scene->disp.mlx);
+		ft_free_scene(scene);
+		menu();
+	}
+
+	
 	if(g_edit_color)
 		return (0);
 	if(keycode == 65509)
 		save_scene(scene);
-	if (keycode == 32) // SPACE
+	if (keycode == KEY_SPACE)
 	{
 		low_render = !low_render;
 		

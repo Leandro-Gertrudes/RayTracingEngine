@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 18:48:20 by ghenriqu          #+#    #+#             */
-/*   Updated: 2026/01/25 16:20:09 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/13 10:48:56 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,9 +158,9 @@ t_rgb	compute_pixel_color(t_scene *scene, t_ray ray, int depth)
 		return ((t_rgb){0, 0, 0});
 	rd.point = vec3_add(ray.origin, vec3_scale(ray.direction, hit.t));
 	rd.normal = get_normal(&hit, rd.point);
-	rd.local_color = shade_hit(scene, &hit, rd.point, rd.normal);
 	if (vec3_dot(rd.normal, ray.direction) > 0)
 		rd.normal = vec3_scale(rd.normal, -1);
+	rd.local_color = shade_hit(scene, &hit, rd.point, rd.normal);
 	r = get_reflectivity(&hit);
 	if (r <= 0.0)
 		return (rd.local_color);

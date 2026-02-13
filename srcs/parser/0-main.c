@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:44:29 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/13 09:01:12 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/13 10:26:42 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	main(int argc, char **argv)
 		menu();
 		return (0);
 	}
-	printf("cheguei\n");
 	if (argc > 6 || ft_is_rt(argv[1]))
 	ft_exit(ERROR_PARAM, 1);
 

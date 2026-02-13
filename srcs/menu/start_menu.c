@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 10:33:54 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/13 09:08:57 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/13 09:33:42 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int	menu_key_hook(int key, t_menu *m)
 {
 	int	max_page;
 
+	//printf("%d\n", key);
 	max_page = (m->scene_count - 1) / m->scenes_per_page;
 
 
@@ -155,7 +156,7 @@ int	menu_key_hook(int key, t_menu *m)
 		start_render_from_menu(m);
 	}
 		
-	if (key == KEY_ESQ) // ESC
+	if (key == KEY_ESQ)
 	{
 		mlx_loop_end(m->mlx);
 		free_menu(m);
@@ -165,6 +166,13 @@ int	menu_key_hook(int key, t_menu *m)
 	return (0);
 }
 
+int	close_window_menu(t_menu *menu)
+{
+	mlx_loop_end(menu->mlx);
+	free_menu(menu);
+	exit(0);
+	return (0);
+}
 
 void	menu()
 {
@@ -184,6 +192,7 @@ void	menu()
 	menu->scenes_per_page = 10;
 
 	mlx_key_hook(menu->win, menu_key_hook, menu);
+	mlx_hook(menu->win, 17, 1L << 17, close_window_menu, menu);
 	mlx_loop_hook(menu->mlx, menu_render, menu);
 	mlx_loop(menu->mlx);
 }
