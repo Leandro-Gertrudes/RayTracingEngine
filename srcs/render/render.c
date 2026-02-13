@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 18:48:20 by ghenriqu          #+#    #+#             */
-/*   Updated: 2026/02/13 10:48:56 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/13 11:48:47 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,75 +78,75 @@ typedef struct s_render_st
 }	t_render_st;
 */
 
-/*
-double	fresnel_schlick(double cos_theta, double f0)
-{
-	return (f0 + (1.0 - f0) * pow(1.0 - cos_theta, 5.0));
-}
+
+// double	fresnel_schlick(double cos_theta, double f0)
+// {
+// 	return (f0 + (1.0 - f0) * pow(1.0 - cos_theta, 5.0));
+// }
 
 
-t_rgb	compute_pixel_color(t_scene *scene, t_ray ray, int depth)
-{
-	t_hit		hit;
-	t_render_st	rd;
-	double		r;
-	double		fresnel;
-	t_vec3		in_dir;
-	double		cos_theta;
+// t_rgb	compute_pixel_color(t_scene *scene, t_ray ray, int depth)
+// {
+// 	t_hit		hit;
+// 	t_render_st	rd;
+// 	double		r;
+// 	double		fresnel;
+// 	t_vec3		in_dir;
+// 	double		cos_theta;
 
-	if (depth <= 0 || !hit_objects(scene, ray, &hit))
-		return ((t_rgb){0, 0, 0});
+// 	if (depth <= 0 || !hit_objects(scene, ray, &hit))
+// 		return ((t_rgb){0, 0, 0});
 
-	// Ponto de impacto
-	rd.point = vec3_add(ray.origin,
-			vec3_scale(ray.direction, hit.t));
+// 	// Ponto de impacto
+// 	rd.point = vec3_add(ray.origin,
+// 			vec3_scale(ray.direction, hit.t));
 
-	// Normal correta
-	rd.normal = vec3_normalize(get_normal(&hit, rd.point));
-	if (vec3_dot(rd.normal, ray.direction) > 0)
-		rd.normal = vec3_scale(rd.normal, -1);
+// 	// Normal correta
+// 	rd.normal = vec3_normalize(get_normal(&hit, rd.point));
+// 	if (vec3_dot(rd.normal, ray.direction) > 0)
+// 		rd.normal = vec3_scale(rd.normal, -1);
 
-	// Iluminação local
-	rd.local_color = shade_hit(scene, &hit, rd.point, rd.normal);
+// 	// Iluminação local
+// 	rd.local_color = shade_hit(scene, &hit, rd.point, rd.normal);
 
-	// Direção de entrada normalizada
-	in_dir = vec3_normalize(ray.direction);
+// 	// Direção de entrada normalizada
+// 	in_dir = vec3_normalize(ray.direction);
 
-	// Ângulo entre view e normal
-	cos_theta = -vec3_dot(in_dir, rd.normal);
-	if (cos_theta < 0.0)
-		cos_theta = 0.0;
+// 	// Ângulo entre view e normal
+// 	cos_theta = -vec3_dot(in_dir, rd.normal);
+// 	if (cos_theta < 0.0)
+// 		cos_theta = 0.0;
 
-	// Reflexividade base do material
-	r = get_reflectivity(&hit);
+// 	// Reflexividade base do material
+// 	r = get_reflectivity(&hit);
 
-	// Fresnel (Schlick)
-	fresnel = fresnel_schlick(cos_theta, r);
+// 	// Fresnel (Schlick)
+// 	fresnel = fresnel_schlick(cos_theta, r);
 
-	// Se não reflete, retorna shading normal
-	if (fresnel <= 0.001)
-		return (rd.local_color);
+// 	// Se não reflete, retorna shading normal
+// 	if (fresnel <= 0.001)
+// 		return (rd.local_color);
 
-	// Raio refletido
-	rd.reflected_ray.origin = vec3_add(
-			rd.point,
-			vec3_scale(rd.normal, 1e-6)
-	);
-	rd.reflected_ray.direction = vec3_reflect(in_dir, rd.normal);
+// 	// Raio refletido
+// 	rd.reflected_ray.origin = vec3_add(
+// 			rd.point,
+// 			vec3_scale(rd.normal, 1e-6)
+// 	);
+// 	rd.reflected_ray.direction = vec3_reflect(in_dir, rd.normal);
 
-	rd.reflected_color = compute_pixel_color(
-			scene,
-			rd.reflected_ray,
-			depth - 1
-	);
+// 	rd.reflected_color = compute_pixel_color(
+// 			scene,
+// 			rd.reflected_ray,
+// 			depth - 1
+// 	);
 
-	// Mistura com Fresnel
-	return (rgb_clamp(rgb_add(
-			vec3_rgb_scale(rd.local_color, 1.0 - fresnel),
-			vec3_rgb_scale(rd.reflected_color, fresnel)
-	)));
-}
-*/
+// 	// Mistura com Fresnel
+// 	return (rgb_clamp(rgb_add(
+// 			vec3_rgb_scale(rd.local_color, 1.0 - fresnel),
+// 			vec3_rgb_scale(rd.reflected_color, fresnel)
+// 	)));
+// }
+
 
 t_rgb	compute_pixel_color(t_scene *scene, t_ray ray, int depth)
 {
@@ -158,9 +158,9 @@ t_rgb	compute_pixel_color(t_scene *scene, t_ray ray, int depth)
 		return ((t_rgb){0, 0, 0});
 	rd.point = vec3_add(ray.origin, vec3_scale(ray.direction, hit.t));
 	rd.normal = get_normal(&hit, rd.point);
+	rd.local_color = shade_hit(scene, &hit, rd.point, rd.normal);
 	if (vec3_dot(rd.normal, ray.direction) > 0)
 		rd.normal = vec3_scale(rd.normal, -1);
-	rd.local_color = shade_hit(scene, &hit, rd.point, rd.normal);
 	r = get_reflectivity(&hit);
 	if (r <= 0.0)
 		return (rd.local_color);
@@ -175,20 +175,6 @@ t_rgb	compute_pixel_color(t_scene *scene, t_ray ray, int depth)
 				vec3_rgb_scale(rd.reflected_color, r)
 			)));
 }
-
-// static void	render_row(t_scene *scene, int y)
-// {
-// 	int		x;
-// 	t_rgb	color;
-
-// 	x = 0;
-// 	while (x < WIDTH)
-// 	{
-// 		color = compute_pixel_color(scene, make_ray(x, y, scene), DEPTH);
-// 		put_pixel(scene, x, y, rgb_to_int(color));
-// 		x++;
-// 	}
-// }
 
 void	display_image(t_scene *scene)
 {
