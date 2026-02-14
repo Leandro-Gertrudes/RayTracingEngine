@@ -6,9 +6,11 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:44:29 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/13 10:26:42 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/13 12:29:25 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+void shoot_projectile();
 
 #include "minirt.h"
 
@@ -25,7 +27,7 @@ double	g_scale_edit = 0.3;
 int	main(int argc, char **argv)
 {
 	int	i;
-
+	shoot_projectile();
 	if(argc == 1)
 	{
 		menu();

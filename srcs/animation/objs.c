@@ -6,82 +6,206 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:11:15 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/11 10:19:54 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/14 17:56:02 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+void	explode_dragon(t_scene *scene);
+
+//DRAG====================
+
+t_vec3	g_proj_pos;
+t_vec3	g_proj_dir;
+int		g_proj_explode = 0;
+
+
+void	shoot_projectile(void)
+{
+	t_vec3	start = vec3_new(31.8765, 18.0, 35.0956);
+	t_vec3	target = vec3_new(-0.3, 11.21, 7.2);
+
+	g_proj_pos = start;
+	g_proj_dir = vec3_normalize(vec3_sub(target, start));
+}
+
+float	vec3_distance(t_vec3 a, t_vec3 b)
+{
+	return (vec3_len(vec3_sub(a, b)));
+}
+
+void	update_projectile(t_scene *scene)
+{
+
+    t_sphere *sp = scene->objects[1]->data;
+	g_proj_pos = vec3_add(g_proj_pos, vec3_scale(g_proj_dir, 0.8f));
+
+	sp->center = g_proj_pos;
+    if (vec3_distance(g_proj_pos, vec3_new(-0.3, 11.21, 7.2)) < 2.0f)
+        g_proj_explode = 1;
+    if(g_proj_explode)
+    	explode_dragon(scene);
+
+}
+
+// explosion
+t_vec3	vec3_rotate_axis(t_vec3 v, t_vec3 axis, float angle)
+{
+	axis = vec3_normalize(axis);
+
+	float cosA = cos(angle);
+	float sinA = sin(angle);
+
+	t_vec3 term1 = vec3_scale(v, cosA);
+	t_vec3 term2 = vec3_scale(vec3_cross(axis, v), sinA);
+	t_vec3 term3 = vec3_scale(axis, vec3_dot(axis, v) * (1 - cosA));
+
+	return vec3_add(vec3_add(term1, term2), term3);
+}
+
+void explode_dragon(t_scene *scene)
+{
+	t_vec3 impact = vec3_new(-0.3, 11.21, 7.2);
+	float new_radius = 6.0f;
+
+	for (int i = 0; i < scene->object_count; i++)
+	{
+		if (scene->objects[i]->type == TRIANGLE)
+		{
+			t_triangle *tri = scene->objects[i]->data;
+
+			t_vec3 center = vec3_scale(
+				vec3_add(vec3_add(tri->a, tri->b), tri->c),
+				1.0f / 3.0f);
+
+			t_vec3 diff = vec3_sub(center, impact);
+			float dist = vec3_len(diff);
+
+			t_vec3 dir = vec3_normalize(diff);
+
+			if (dist < new_radius)
+			{
+				float strength = (new_radius - dist) * 0.6f;
+
+				tri->a = vec3_add(tri->a, vec3_scale(dir, strength));
+				tri->b = vec3_add(tri->b, vec3_scale(dir, strength));
+				tri->c = vec3_add(tri->c, vec3_scale(dir, strength));
+
+				float angle = 0.25f;
+
+				t_vec3 local1 = vec3_sub(tri->a, center);
+				t_vec3 local2 = vec3_sub(tri->b, center);
+				t_vec3 local3 = vec3_sub(tri->c, center);
+
+				local1 = vec3_rotate_axis(local1, dir, angle);
+				local2 = vec3_rotate_axis(local2, dir, angle);
+				local3 = vec3_rotate_axis(local3, dir, angle);
+
+				tri->a = vec3_add(center, local1);
+				tri->b = vec3_add(center, local2);
+				tri->c = vec3_add(center, local3);
+			}
+
+			else
+			{
+				float strength = 2.0f / (dist + 1.0f);
+
+				tri->a = vec3_add(tri->a, vec3_scale(dir, strength));
+				tri->b = vec3_add(tri->b, vec3_scale(dir, strength));
+				tri->c = vec3_add(tri->c, vec3_scale(dir, strength));
+
+				float angle = 0.1f;
+
+				t_vec3 local1 = vec3_sub(tri->a, center);
+				t_vec3 local2 = vec3_sub(tri->b, center);
+				t_vec3 local3 = vec3_sub(tri->c, center);
+
+				local1 = vec3_rotate_axis(local1, dir, angle);
+				local2 = vec3_rotate_axis(local2, dir, angle);
+				local3 = vec3_rotate_axis(local3, dir, angle);
+
+				tri->a = vec3_add(center, local1);
+				tri->b = vec3_add(center, local2);
+				tri->c = vec3_add(center, local3);
+			}
+		}
+	}
+}
+
+
+
+
 //Diamante girando====================
 // Adiciona no topo do arquivo (variáveis estáticas para guardar posições originais)
-static t_vec3 diamond_original[48]; // 16 triângulos x 3 vértices = 48 pontos
-static int diamond_initialized = 0;
+// static t_vec3 diamond_original[48]; // 16 triângulos x 3 vértices = 48 pontos
+// static int diamond_initialized = 0;
 
-void update_diamond_rotation(t_scene *sc)
-{
-    double angle;
-    double cos_a, sin_a;
-    t_vec3 center = {0.0, 5.0, 0.0}; // centro do diamante
-    int i, vertex_idx;
+// void update_diamond_rotation(t_scene *sc)
+// {
+//     double angle;
+//     double cos_a, sin_a;
+//     t_vec3 center = {0.0, 5.0, 0.0}; // centro do diamante
+//     int i, vertex_idx;
     
-    // primeira vez: salva posições originais
-    if (!diamond_initialized)
-    {
-        vertex_idx = 0;
-        for (i = 0; i < sc->object_count; i++)
-        {
-            if (sc->objects[i]->type == TRIANGLE)
-            {
-                t_triangle *tr = (t_triangle *)sc->objects[i]->data;
-                diamond_original[vertex_idx++] = tr->a;
-                diamond_original[vertex_idx++] = tr->b;
-                diamond_original[vertex_idx++] = tr->c;
-            }
-        }
-        diamond_initialized = 1;
-    }
+//     // primeira vez: salva posições originais
+//     if (!diamond_initialized)
+//     {
+//         vertex_idx = 0;
+//         for (i = 0; i < sc->object_count; i++)
+//         {
+//             if (sc->objects[i]->type == TRIANGLE)
+//             {
+//                 t_triangle *tr = (t_triangle *)sc->objects[i]->data;
+//                 diamond_original[vertex_idx++] = tr->a;
+//                 diamond_original[vertex_idx++] = tr->b;
+//                 diamond_original[vertex_idx++] = tr->c;
+//             }
+//         }
+//         diamond_initialized = 1;
+//     }
     
-    // velocidade de rotação (1 volta a cada 5 segundos)
-    angle = sc->time.current * 2.0 * M_PI / 15.0;
+//     // velocidade de rotação (1 volta a cada 5 segundos)
+//     angle = sc->time.current * 2.0 * M_PI / 15.0;
     
-    cos_a = cos(angle);
-    sin_a = sin(angle);
+//     cos_a = cos(angle);
+//     sin_a = sin(angle);
     
-    // aplica rotação a partir das posições originais
-    vertex_idx = 0;
-    for (i = 0; i < sc->object_count; i++)
-    {
-        if (sc->objects[i]->type == TRIANGLE)
-        {
-            t_triangle *tr = (t_triangle *)sc->objects[i]->data;
-            t_vec3 offset;
+//     // aplica rotação a partir das posições originais
+//     vertex_idx = 0;
+//     for (i = 0; i < sc->object_count; i++)
+//     {
+//         if (sc->objects[i]->type == TRIANGLE)
+//         {
+//             t_triangle *tr = (t_triangle *)sc->objects[i]->data;
+//             t_vec3 offset;
             
-            // rotaciona vértice A
-            offset.x = diamond_original[vertex_idx].x - center.x;
-            offset.z = diamond_original[vertex_idx].z - center.z;
-            tr->a.x = center.x + (offset.x * cos_a - offset.z * sin_a);
-            tr->a.z = center.z + (offset.x * sin_a + offset.z * cos_a);
-            tr->a.y = diamond_original[vertex_idx].y; // Y não muda
-            vertex_idx++;
+//             // rotaciona vértice A
+//             offset.x = diamond_original[vertex_idx].x - center.x;
+//             offset.z = diamond_original[vertex_idx].z - center.z;
+//             tr->a.x = center.x + (offset.x * cos_a - offset.z * sin_a);
+//             tr->a.z = center.z + (offset.x * sin_a + offset.z * cos_a);
+//             tr->a.y = diamond_original[vertex_idx].y; // Y não muda
+//             vertex_idx++;
             
-            // rotaciona vértice B
-            offset.x = diamond_original[vertex_idx].x - center.x;
-            offset.z = diamond_original[vertex_idx].z - center.z;
-            tr->b.x = center.x + (offset.x * cos_a - offset.z * sin_a);
-            tr->b.z = center.z + (offset.x * sin_a + offset.z * cos_a);
-            tr->b.y = diamond_original[vertex_idx].y;
-            vertex_idx++;
+//             // rotaciona vértice B
+//             offset.x = diamond_original[vertex_idx].x - center.x;
+//             offset.z = diamond_original[vertex_idx].z - center.z;
+//             tr->b.x = center.x + (offset.x * cos_a - offset.z * sin_a);
+//             tr->b.z = center.z + (offset.x * sin_a + offset.z * cos_a);
+//             tr->b.y = diamond_original[vertex_idx].y;
+//             vertex_idx++;
             
-            // rotaciona vértice C
-            offset.x = diamond_original[vertex_idx].x - center.x;
-            offset.z = diamond_original[vertex_idx].z - center.z;
-            tr->c.x = center.x + (offset.x * cos_a - offset.z * sin_a);
-            tr->c.z = center.z + (offset.x * sin_a + offset.z * cos_a);
-            tr->c.y = diamond_original[vertex_idx].y;
-            vertex_idx++;
-        }
-    }
-}
+//             // rotaciona vértice C
+//             offset.x = diamond_original[vertex_idx].x - center.x;
+//             offset.z = diamond_original[vertex_idx].z - center.z;
+//             tr->c.x = center.x + (offset.x * cos_a - offset.z * sin_a);
+//             tr->c.z = center.z + (offset.x * sin_a + offset.z * cos_a);
+//             tr->c.y = diamond_original[vertex_idx].y;
+//             vertex_idx++;
+//         }
+//     }
+// }
 
 //chuva de objetos.====================
 
