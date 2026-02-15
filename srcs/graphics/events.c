@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:42:38 by ghenriqu          #+#    #+#             */
-/*   Updated: 2026/02/13 11:52:53 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/15 16:01:43 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	key_press(int keycode, t_scene *scene)
 {
 	if (keycode == KEY_ESQ)
 		return (close_window(scene));
-	
+
 	if(keycode == KEY_F1)
 	{
 		mlx_destroy_image(scene->disp.mlx, scene->disp.img);
@@ -56,7 +56,7 @@ int	key_press(int keycode, t_scene *scene)
 	
 	if(g_edit_color)
 		return (0);
-	if(keycode == 65509)
+	if(keycode == KEY_CAPSLOCK)
 		save_scene(scene);
 	if (keycode == KEY_SPACE)
 	{

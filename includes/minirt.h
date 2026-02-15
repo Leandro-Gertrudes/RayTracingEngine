@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/14 17:47:43 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/15 16:01:31 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
 #define KEY_RIGHT		65363
 #define KEY_ENTER		65293
 #define KEY_LEFT_ENTER	65421
+#define KEY_CAPSLOCK	65509
 #define KEY_PLUS		61
 #define KEY_MINUS		45
 #define KEY_SPACE		32

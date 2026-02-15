@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:57:06 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/25 16:49:21 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/15 16:08:19 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,6 @@ static t_rgb	get_object_color(t_hit *hit)
 		return (((t_triangle *)hit->object)->color);
 	return ((t_rgb){0, 0, 0});
 }
-// t_vec3 get_light_position(t_scene *scene)
-// {
-//     int i;
-
-//     if (scene->obj_edit.type == LIGHT && scene->obj_edit.data && g_edit)
-//     {
-//         t_light *l = scene->obj_edit.data;
-//         return l->position;
-//     }
-
-
-//     for (i = 0; i < scene->light_count; i++)
-//     {
-//         if (scene->lights[i])
-//             return scene->lights[i]->position;
-//     }
-//     return (t_vec3){0, 0, 0};
-// }
-
 
 t_rgb	low_compute_pixel_color(t_scene *scene, t_ray ray)
 {
@@ -210,7 +191,7 @@ void draw_hud(t_scene *scene)
 
 	snprintf(buf, sizeof(buf), "Camera Vec: (%.2f, %.2f, %.2f)",
 		scene->camera->vector.x, scene->camera->vector.y, scene->camera->vector.z);
-	mlx_string_put(scene->disp.mlx, scene->disp.win, x + 10, line_y, 0xFFFFFF, buf); // vetor em ciano
+	mlx_string_put(scene->disp.mlx, scene->disp.win, x + 10, line_y, 0xFFFFFF, buf);
 	line_y += 20;
 
 	snprintf(buf, sizeof(buf), "Objects: %d", scene->object_count);

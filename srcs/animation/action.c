@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:05:20 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/14 17:57:26 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/15 14:17:41 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int	render_loop(void *param)
 void	update_scene(t_scene *sc)
 {
 	update_time(sc);
-	//update_projectile(sc);
+	update_projectile(sc);
 	//explode_dragon(sc);
 	//update_billiard(sc);
 	//update_rain(sc);
