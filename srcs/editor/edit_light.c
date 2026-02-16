@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 10:25:06 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/24 13:26:00 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 14:31:15 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,4 @@ void	select_light(t_scene *scene, int keycode)
 	scene->obj_edit.data = scene->lights[next];
 	low_render_scene(scene);
 	draw_hud_obj(scene, scene->obj_edit.type, scene->obj_edit.data);
-	
 }

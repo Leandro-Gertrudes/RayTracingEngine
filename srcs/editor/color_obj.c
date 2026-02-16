@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:06:53 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/24 14:40:58 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 14:30:19 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,15 @@ void	request_color_from_terminal(t_scene *scene)
 	char	*line;
 	t_rgb	color;
 
-    // cabeçalho do modo color
-    printf("\033[1;37m\n=== COLOR EDIT MODE ===\033[0m\n"); // negrito branco
-    printf("\033[1;33mPresets:\033[0m\n\n"); // amarelo
+    printf("\033[1;37m\n=== COLOR EDIT MODE ===\033[0m\n");
+    printf("\033[1;33mPresets:\033[0m\n\n");
 
-    // presets coloridos
-    printf("\033[1;31m(1) Red\033[0m  ");    // vermelho
-    printf("\033[1;32m(2) Green\033[0m  ");  // verde
-    printf("\033[1;34m(3) Blue\033[0m\n");   // azul
-    printf("\033[1;37m(4) White\033[0m  ");  // branco
-    printf("\033[1;30m(5) Black\033[0m\n\n");  // preto
-    printf("\033[1;36mtype RGB as: r,g,b or 'q' to quit\033[0m\n"); // ciano
+    printf("\033[1;31m(1) Red\033[0m  ");
+    printf("\033[1;32m(2) Green\033[0m  ");
+    printf("\033[1;34m(3) Blue\033[0m\n");
+    printf("\033[1;37m(4) White\033[0m  ");
+    printf("\033[1;30m(5) Black\033[0m\n\n");
+    printf("\033[1;36mtype RGB as: r,g,b or 'q' to quit\033[0m\n");
     printf("> ");
 
 	line = get_next_line(0);

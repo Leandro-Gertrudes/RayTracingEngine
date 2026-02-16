@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 10:33:54 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/13 09:33:42 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 14:43:30 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	menu_key_hook(int key, t_menu *m)
 {
 	int	max_page;
 
-	//printf("%d\n", key);
+	printf("%d\n", key);
 	max_page = (m->scene_count - 1) / m->scenes_per_page;
 
 

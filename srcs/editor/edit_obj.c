@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 14:22:04 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/24 14:44:48 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 14:31:49 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	draw_hud_obj(t_scene *scene, t_obj_type type, void *data)
 	mlx_string_put(scene->disp.mlx, scene->disp.win,
 		x + 10, line_y, 0xFFFFFF, buf);
 	line_y += 18;
-	
+
 	// ===== INFO ===== //
 	show_infos(scene, type, data, x, line_y);
 }
@@ -59,7 +59,7 @@ void	show_infos(t_scene *scene, t_obj_type type,
 	void *data, int x, int line_y)
 {
 	char	buf[128];
-	
+
 	if (type == SPHERE)
 	{
 		t_sphere *sp = data;
@@ -168,7 +168,7 @@ void	show_infos(t_scene *scene, t_obj_type type,
 		line_y += 16;
 	}
 	else if (type == LIGHT)
-{
+	{
 	t_light *li = data;
 
 	snprintf(buf, sizeof(buf),
@@ -191,7 +191,7 @@ void	show_infos(t_scene *scene, t_obj_type type,
 	mlx_string_put(scene->disp.mlx, scene->disp.win,
 		x + 10, line_y, 0xFFFFFF, buf);
 	line_y += 16;
-}
+	}
 
 	snprintf(buf, sizeof(buf),
 			"Edit sensitivity : %.1f", g_scale_edit);
@@ -200,7 +200,6 @@ void	show_infos(t_scene *scene, t_obj_type type,
 		
 	mlx_string_put(scene->disp.mlx, scene->disp.win,
 		x + 100, line_y + 54, 0xAAAAAA, "press Q to return");
-	
 }
 
 

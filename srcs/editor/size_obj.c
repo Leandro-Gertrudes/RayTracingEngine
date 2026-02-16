@@ -6,34 +6,36 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 12:30:44 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/24 16:59:49 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 14:38:10 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/// @brief TIRAR TERNARIO.
-/// @param cy 
-/// @param keycode 
 static void	scale_cylinder(t_cylinder *cy, int keycode)
 {
-	double s;
+	double	s;
 
+	s = 0.0;
+	/* diameter*/
 	if (keycode == 106 || keycode == 107)
 	{
-		s = (keycode == 107)
-			? 1.0 * g_scale_edit
-			: -1.0 * g_scale_edit;
+		if (keycode == 107)
+			s = 1.0 * g_scale_edit;
+		else
+			s = -1.0 * g_scale_edit;
 
 		cy->diameter += s;
 		if (cy->diameter < 0.01)
 			cy->diameter = 0.01;
 	}
+	/* height */
 	else
 	{
-		s = (keycode == 109)
-			?  1 * g_scale_edit
-			: -1 - g_scale_edit;
+		if (keycode == 109)
+			s = 1.0 * g_scale_edit;
+		else
+			s = -1.0 * g_scale_edit;
 
 		cy->height += s;
 		if (cy->height < 0.01)
@@ -44,8 +46,8 @@ static void	scale_cylinder(t_cylinder *cy, int keycode)
 
 void scale_triangle(t_triangle *tr, int keycode)
 {
-	double s;
-	t_vec3 center;
+	double	s;
+	t_vec3	center;
 
 	if (keycode == 107)
 		s = 1.0 + g_scale_edit;

@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 14:21:50 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/21 14:23:53 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 14:30:58 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	move_camera(t_scene *scene, int keycode)
 
 static void	move_camera_xyz(t_scene *scene, int keycode)
 {
-	double speed = 0.3;
-	t_camera *cam = scene->camera;
+	double		speed = 0.3;
+	t_camera	*cam = scene->camera;
 
 	if (keycode == 119)
 		cam->position = vec3_add(cam->position,
@@ -59,8 +59,8 @@ static void	move_camera_xyz(t_scene *scene, int keycode)
 
 static void	move_camera_vector(t_scene *scene, int keycode)
 {
-	double speed = 0.05;
-	t_camera *cam = scene->camera;
+	double		speed = 0.05;
+	t_camera	*cam = scene->camera;
 
 	if (keycode == 65363) //left
 		cam->vector.x -= speed;

@@ -6,7 +6,7 @@
 #    By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/13 20:39:24 by ghenriqu          #+#    #+#              #
-#    Updated: 2026/02/11 10:50:04 by lgertrud         ###   ########.fr        #
+#    Updated: 2026/02/16 14:12:49 by lgertrud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,10 +73,9 @@ SRC	=	$(SRC_DIR)/parser/0-main.c \
 			$(SRC_DIR)/render/transition.c \
 		$(SRC_DIR)/graphics/events.c \
 			$(SRC_DIR)/graphics/minilibx_setup.c \
-		$(SRC_DIR)/animation/light.c \
-			$(SRC_DIR)/animation/cam.c \
+		$(SRC_DIR)/animation/image.c \
 			$(SRC_DIR)/animation/action.c \
-			$(SRC_DIR)/animation/objs.c \
+			$(SRC_DIR)/animation/updates.c \
 		$(SRC_DIR)/editor/edit_camera.c \
 			$(SRC_DIR)/editor/edit_obj.c \
 			$(SRC_DIR)/editor/move_obj.c  \

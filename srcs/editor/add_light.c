@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 11:54:59 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/23 11:55:45 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 14:29:04 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_light	*create_light(t_camera *cam)
 
 void	add_light_to_scene(t_scene *scene, t_light *new_light)
 {
-	t_light **tmp;
+	t_light	**tmp;
 
 	tmp = realloc(scene->lights,
 		sizeof(t_light *) * (scene->light_count + 1));
@@ -47,7 +47,7 @@ void	add_light_to_scene(t_scene *scene, t_light *new_light)
 
 void	add_light(t_scene *scene)
 {
-	t_light *li;
+	t_light	*li;
 
 	li = create_light(scene->camera);
 	if (!li)

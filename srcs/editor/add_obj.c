@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 15:34:27 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/23 12:28:32 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 14:28:50 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_vec3	get_spawn_position(t_camera *cam, double dist)
 
 t_object	*create_sphere(t_camera *cam)
 {
-	t_object *obj = malloc(sizeof(t_object));
-	t_sphere *sp = malloc(sizeof(t_sphere));
+	t_object	*obj = malloc(sizeof(t_object));
+	t_sphere	*sp = malloc(sizeof(t_sphere));
 
 	sp->center = get_spawn_position(cam, 3.0); 
 	sp->diameter = 1.0;
@@ -35,8 +35,8 @@ t_object	*create_sphere(t_camera *cam)
 
 t_object	*create_plane(t_camera *cam)
 {
-	t_object *obj = malloc(sizeof(t_object));
-	t_plane *pl = malloc(sizeof(t_plane));
+	t_object	*obj = malloc(sizeof(t_object));
+	t_plane		*pl = malloc(sizeof(t_plane));
 
 	pl->point = get_spawn_position(cam, 3.0);
 	pl->normal = (t_vec3){0, 1, 0};
@@ -50,8 +50,8 @@ t_object	*create_plane(t_camera *cam)
 
 t_object	*create_cylinder(t_camera *cam)
 {
-	t_object *obj = malloc(sizeof(t_object));
-	t_cylinder *cy = malloc(sizeof(t_cylinder));
+	t_object	*obj = malloc(sizeof(t_object));
+	t_cylinder	*cy = malloc(sizeof(t_cylinder));
 
 	cy->center = get_spawn_position(cam, 3.0);
 	cy->normal = (t_vec3){0, 1, 0};
@@ -67,10 +67,9 @@ t_object	*create_cylinder(t_camera *cam)
 
 t_object	*create_triangle(t_camera *cam)
 {
-	t_object *obj = malloc(sizeof(t_object));
-	t_triangle *tr = malloc(sizeof(t_triangle));
-
-	t_vec3 pos = get_spawn_position(cam, 3.0);
+	t_object	*obj = malloc(sizeof(t_object));
+	t_triangle	*tr = malloc(sizeof(t_triangle));
+	t_vec3		pos = get_spawn_position(cam, 3.0);
 
 	tr->a = pos;
 	tr->b = vec3_add(pos, (t_vec3){1, 0, 0});
@@ -85,7 +84,7 @@ t_object	*create_triangle(t_camera *cam)
 
 void	add_object_to_scene(t_scene *scene, t_object *new_obj)
 {
-	t_object **tmp;
+	t_object	**tmp;
 
 	tmp = realloc(scene->objects, sizeof(t_object*) * (scene->object_count + 1));
 	if (!tmp)
@@ -98,12 +97,9 @@ void	add_object_to_scene(t_scene *scene, t_object *new_obj)
 	scene->object_count++;
 }
 
-
-
-
 void	add_object(t_scene *scene, int keycode)
 {
-	t_object *obj = NULL;
+	t_object	*obj = NULL;
 
 	if (keycode == 49)  
 		obj = create_sphere(scene->camera);

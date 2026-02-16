@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 14:57:31 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/25 15:43:49 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 14:51:06 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*get_filename(void)
 	int		i = 0;
 	int		r;
 
-	write(1, "\nNome do ficheiro (.rt): ", 25);
+	write(1, "\nFile name (.rt): ", 18);
 	r = read(0, buf, 255);
 	if (r <= 1)
 		return (NULL);
@@ -138,9 +138,13 @@ void	write_ambient(int fd, t_ambient_light *a)
 
 void	write_scene(int fd, t_scene *scene)
 {
+	dprintf(fd, "# === cam ===\n");
 	write_camera(fd, scene->camera);
+	dprintf(fd, "\n# === ambient light ===\n");
 	write_ambient(fd, scene->ambient);
+	dprintf(fd, "\n# === lights ===\n");
 	write_lights(fd, scene->lights, scene->light_count);
+	dprintf(fd, "\n# === OBJS===\n");
 	write_objects(fd, scene);
 }
 
@@ -149,21 +153,28 @@ void	save_scene(t_scene *scene)
 {
 	int		fd;
 	char	*filename;
+	char	*path;
 
 	filename = get_filename();
 	if (!filename)
 		return ;
 
-	fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	path = ft_strjoin("scenes/", filename);
+	free(filename);
+	if (!path)
+		return ;
+
+	fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 	{
-		free(filename);
+		free(path);
 		return ;
 	}
 
 	write_scene(fd, scene);
 
 	close(fd);
-	free(filename);
-	write(1, "Cena salva com sucesso!\n", 25);
+	free(path);
+	write(1, "Saved successfully!\n", 21);
 }
+

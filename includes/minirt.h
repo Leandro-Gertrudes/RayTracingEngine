@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/15 16:01:31 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 14:45:31 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,14 @@
 # include "../X11/X.h"
 # include "../X11/keysym.h"
 
-# define M_PI	3.14159265358979323846
 # define ERROR_PARAM "Error\nUsage: ./minirt <file.rt>"
 # define ERROR_FRAMES "Error\nUsage: ./minirt <file.rt> --frames <numFirstFrame> <numLastFrame>"
 # define ERROR_FILE "Error\nCannot open this found."
 # define ERROR_MALLOC "Error\nCannot allocate memmory."
 # define ERROR_SCENE "Error\ninvalid scene."
-# define THREAD_COUNT 20
+
+# define M_PI	3.14159265358979323846
+# define THREAD_COUNT 16
 # define WIDTH 1400
 # define HEIGHT 800
 
@@ -41,9 +42,6 @@
 # define KEYRELEASE      3
 # define BUTTONPRESS     4
 # define BUTTONRELEASE   5
-# define MOTIONNOTIFY    6
-# define DESTROYNOTIFY   17
-# define EXPOSE          12
 
 #define KEY_ESQ			65307
 #define KEY_UP			65362
@@ -58,6 +56,8 @@
 #define KEY_MINUS		45
 #define KEY_SPACE		32
 
+
+// ----Global variables
 typedef enum e_mode {
 	DEFAULT,
     ANIMATE,
@@ -73,14 +73,7 @@ extern bool				g_edit_color;
 extern bool				g_edit_light;
 extern double			g_scale_edit;
 
-
-enum e_event_mask
-{
-	KEYPRESSMASK = 1L << 0,
-	KEYRELEASEMASK = 1L << 1,
-	BUTTONPRESSMASK = 1L << 2,
-	STRUCNOTIFYMASK = 1L << 17
-};
+// ----structs scene
 
 typedef struct s_vec3
 {
@@ -191,6 +184,8 @@ typedef struct s_object
 	void		*data;
 }	t_object;
 
+
+// ----mlx
 typedef struct s_graphics
 {
 	void	*mlx;
@@ -204,6 +199,8 @@ typedef struct s_graphics
 	int		endian;
 }	t_graphics;
 
+
+// --animation
 typedef struct s_time
 {
 	double	current;
@@ -235,6 +232,7 @@ typedef struct s_image
 	t_rgb	*pixels;
 }	t_image;
 
+// ---scene, main struct
 typedef struct s_scene
 {
 	t_ambient_light	*ambient;
@@ -250,8 +248,6 @@ typedef struct s_scene
 	t_image			*image;
 	t_object		obj_edit;
 }	t_scene;
-
-
 
 
 typedef struct s_ray
@@ -320,6 +316,8 @@ typedef struct s_cylinder_hit
 	double	h;
 }	t_cylinder_hit;
 
+
+// --render structs
 typedef struct s_render_st
 {
 	t_vec3	point;
@@ -464,10 +462,6 @@ void			ft_init_graphics(t_scene *scene);
 
 // ==== animation ====
 
-void	update_time(t_scene *sc);
-void	init_anim_light(t_scene *sc);
-double	get_time_sec(void);
-void	update_anim_light(t_scene *sc);
 int		render_loop(void *param);
 void	update_scene(t_scene *sc);
 void	update_anim_camera(t_scene *sc);
@@ -475,11 +469,16 @@ void	init_anim_camera(t_scene *sc);
 int		render_loop(void *param);
 void	save_image_ppm(t_image *img, char *filename);
 void	render_animation(t_scene *sc);
+void	update_time(t_scene *sc);
 t_image	*image_create(int width, int height);
 void	image_clear(t_image *img);
+void	update_dragon(t_scene *scene);
+void	update_diamond_rotation(t_scene *sc);
+void	update_billiard(t_scene *sc);
+void	update_falling_sphere(t_scene *sc);
+void	update_anim_spheres(t_scene *sc);
 
-
-// ==== edit ====
+// ==== edit mode ====
 
 void	edit_obj(t_scene *scene, t_object *obj_edit, int keycode);
 void	add_object(t_scene *scene, int keycode);
@@ -508,5 +507,4 @@ void	save_scene(t_scene *scene);
 
 void	menu(void);
 char	**load_scenes(char *path, int *scene_count);
-
 #endif
