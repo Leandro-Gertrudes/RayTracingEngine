@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/16 15:43:40 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 16:31:03 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,41 @@
 # define BUTTONPRESS     4
 # define BUTTONRELEASE   5
 
-#define KEY_ESQ			65307
-#define KEY_UP			65362
-#define KEY_F1			65470
-#define KEY_DOWN		65364
-#define KEY_LEFT		65361
-#define KEY_RIGHT		65363
-#define KEY_ENTER		65293
-#define KEY_LEFT_ENTER	65421
-#define KEY_CAPSLOCK	65509
-#define KEY_PLUS		61
-#define KEY_MINUS		45
-#define KEY_SPACE		32
-
+#define KEY_ESQ				65307
+#define KEY_UP				65362
+#define KEY_F1				65470
+#define KEY_DOWN			65364
+#define KEY_LEFT			65361
+#define KEY_RIGHT			65363
+#define KEY_ENTER			65293
+#define KEY_LEFT_ENTER		65421
+#define KEY_LEFT_SHIFT		65505
+#define KEY_CAPSLOCK		65509
+#define KEY_BACKSPACE		65288
+#define KEY_PLUS			61
+#define KEY_MINUS			45
+#define KEY_SPACE			32
+#define KEY_W				119
+#define KEY_A				97
+#define KEY_S				115
+#define KEY_D				100
+#define KEY_Q				113
+#define KEY_E				101
+#define KEY_NUMBER1			49
+#define KEY_NUMBER2			50
+#define KEY_NUMBER3			51
+#define KEY_NUMBER4			52
+#define KEY_NUMBER5			53
+#define KEY_Z				122
+#define KEY_C				99
+#define KEY_I				105
+#define KEY_O				111
+#define KEY_J				106
+#define KEY_K				107
+#define KEY_N				110
+#define KEY_M				109
+#define KEY_T				116
+#define KEY_P				112
 
 // ----Global variables
 typedef enum e_mode {

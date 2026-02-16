@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 14:22:04 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/16 14:31:49 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 16:33:48 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,27 +267,27 @@ int	mouse_hook(int button,int x, int y, t_scene *scene)
 void	edit_obj(t_scene *scene, t_object *obj_edit, int keycode)
 {
 	//printf("%d\n", keycode);
-	if (keycode == 119 || keycode == 115 || keycode == 97
-			|| keycode == 100)
+	if (keycode == KEY_W || keycode == KEY_S || keycode == KEY_A
+			|| keycode == KEY_D)
 		return (move_obj_xy(scene, obj_edit, keycode));
 		
-	else if (keycode == 65361 || keycode == 65363 || keycode == 65362
-	 		|| keycode == 65364 || keycode == 122 || keycode == 99)
+	else if (keycode == KEY_LEFT || keycode == KEY_RIGHT || keycode == KEY_UP
+	 		|| keycode == KEY_DOWN || keycode == KEY_Z || keycode == KEY_C)
 		return (move_obj_angule(scene, obj_edit, keycode));
 
-	else if (keycode == 106 || keycode == 107 || keycode == 110
-				|| keycode == 109)
+	else if (keycode == KEY_J || keycode == KEY_K || keycode == KEY_N
+				|| keycode == KEY_M)
 		return (size_obj(scene, obj_edit, keycode));
 
-	else if (keycode == 116)
+	else if (keycode == KEY_T)
 		color_obj_edit(scene, obj_edit, keycode);
 		
-	else if (keycode == 105 || keycode == 111)
+	else if (keycode == KEY_I || keycode == KEY_O)
 		return (reflectivity_update(scene, obj_edit, keycode));
 
-	else if(g_edit_light && (keycode == 65105 || keycode == 91 || keycode == 112))
+	else if(g_edit_light && (keycode == 65105 || keycode == 91 || keycode == KEY_P))
 		select_light(scene, keycode);
 	
-	else if (keycode == 65288)
+	else if (keycode == KEY_BACKSPACE)
 		remove_obj(scene);
 }

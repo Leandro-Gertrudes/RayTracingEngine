@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:47:12 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/16 14:29:36 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 16:20:49 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	move_obj_angule(t_scene *scene, t_object *obj_edit, int keycode)
 {
 	t_vec3 rot = (t_vec3){0, 0, 0};
 
-	if (keycode == 65364) rot.x -= g_scale_edit; // → 
-	if (keycode == 65362) rot.x += g_scale_edit; // ← 
-	if (keycode == 65363) rot.y += g_scale_edit; // ↑
-	if (keycode == 65361) rot.y -= g_scale_edit; // ↓ 
-	if (keycode == 99)   rot.z += g_scale_edit; // z 
-	if (keycode == 122)    rot.z -= g_scale_edit; // c 
+	if (keycode == KEY_UP) rot.x -= g_scale_edit; // ↑
+	if (keycode == KEY_DOWN) rot.x += g_scale_edit; // ↓
+	if (keycode == KEY_RIGHT) rot.y += g_scale_edit; // →
+	if (keycode == KEY_LEFT) rot.y -= g_scale_edit; //  ←
+	if (keycode == KEY_C)   rot.z += g_scale_edit; // c
+	if (keycode == KEY_Z)    rot.z -= g_scale_edit; // z
 
 	if (obj_edit->type == PLANE)
 	{

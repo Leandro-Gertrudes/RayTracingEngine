@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 15:34:27 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/16 14:28:50 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 16:28:53 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,15 +101,15 @@ void	add_object(t_scene *scene, int keycode)
 {
 	t_object	*obj = NULL;
 
-	if (keycode == 49)  
+	if (keycode == KEY_NUMBER1)  
 		obj = create_sphere(scene->camera);
-	else if (keycode == 52)
+	else if (keycode == KEY_NUMBER4)
 		obj = create_plane(scene->camera);
-	else if (keycode == 50)
+	else if (keycode == KEY_NUMBER2)
 		obj = create_cylinder(scene->camera);
-	else if (keycode == 51)
+	else if (keycode == KEY_NUMBER3)
 		obj = create_triangle(scene->camera);
-	else if (keycode == 53)
+	else if (keycode == KEY_NUMBER5)
 		return (add_light(scene));
 	else
 		return ;

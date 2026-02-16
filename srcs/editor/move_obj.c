@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 17:19:54 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/09 16:29:45 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 16:35:10 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static void	get_move_delta(int keycode, double *dx, double *dy)
 	*dx = 0;
 	*dy = 0;
 
-	if (keycode == 119)
+	if (keycode == KEY_W)
 		*dy = g_scale_edit;
-	else if (keycode == 115)
+	else if (keycode == KEY_S)
 		*dy = -g_scale_edit;
-	else if (keycode == 100)
+	else if (keycode == KEY_D)
 		*dx = -g_scale_edit;
-	else if (keycode == 97)
+	else if (keycode == KEY_A)
 		*dx = g_scale_edit;
 }
 
@@ -42,9 +42,9 @@ void reflectivity_update(t_scene *scene, t_object *obj_edit, int keycode)
 
 	new = 0.0;
 
-	if(keycode == 111)
+	if(keycode == KEY_O)
 		new += g_scale_edit;
-	else if (keycode == 105)
+	else if (keycode == KEY_I)
 		new -= g_scale_edit;
 
 	if (obj_edit->type == SPHERE)
@@ -174,9 +174,9 @@ void	move_obj_z(t_scene *scene, t_object *obj_edit, int button)
 
 void update_move(int keycode)
 {
-	if(keycode == 61)
+	if(keycode == KEY_PLUS)
 		g_scale_edit += 0.2;
-	if(keycode == 45)
+	if(keycode == KEY_MINUS)
 		g_scale_edit -= 0.2;
 		
 	if(g_scale_edit <= 0.1)

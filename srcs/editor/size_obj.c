@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 12:30:44 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/16 14:38:10 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 16:36:03 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	scale_cylinder(t_cylinder *cy, int keycode)
 
 	s = 0.0;
 	/* diameter*/
-	if (keycode == 106 || keycode == 107)
+	if (keycode == KEY_J || keycode == KEY_K)
 	{
-		if (keycode == 107)
+		if (keycode == KEY_K)
 			s = 1.0 * g_scale_edit;
 		else
 			s = -1.0 * g_scale_edit;
@@ -32,7 +32,7 @@ static void	scale_cylinder(t_cylinder *cy, int keycode)
 	/* height */
 	else
 	{
-		if (keycode == 109)
+		if (keycode == KEY_M)
 			s = 1.0 * g_scale_edit;
 		else
 			s = -1.0 * g_scale_edit;
@@ -49,9 +49,9 @@ void scale_triangle(t_triangle *tr, int keycode)
 	double	s;
 	t_vec3	center;
 
-	if (keycode == 107)
+	if (keycode == KEY_K)
 		s = 1.0 + g_scale_edit;
-	else if (keycode == 106)
+	else if (keycode == KEY_J)
 		s = 1.0 - g_scale_edit;
 	else
 		return ;
@@ -79,7 +79,7 @@ void	size_obj(t_scene *scene, t_object *obj_edit, int keycode)
 	if (obj_edit->type == SPHERE)
 	{
 		t_sphere *sp = obj_edit->data;
-		if (keycode == 106)
+		if (keycode == KEY_J)
 			sp->diameter *= (1.0 - g_scale_edit);
 		else
 			sp->diameter *= (1.0 + g_scale_edit);
@@ -94,7 +94,7 @@ void	size_obj(t_scene *scene, t_object *obj_edit, int keycode)
 	else if (obj_edit->type == LIGHT)
 	{
 		t_light *l = obj_edit->data;
-		if (keycode == 106)
+		if (keycode == KEY_J)
 			l->ratio -= g_scale_edit;
 		else
 			l->ratio +=  g_scale_edit;
