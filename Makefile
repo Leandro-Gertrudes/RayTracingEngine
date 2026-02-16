@@ -6,11 +6,11 @@
 #    By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/13 20:39:24 by ghenriqu          #+#    #+#              #
-#    Updated: 2026/02/16 14:12:49 by lgertrud         ###   ########.fr        #
+#    Updated: 2026/02/16 15:41:42 by lgertrud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME        = miniRT
+NAME		= miniRT
 
 # Compiler
 CC          = cc
@@ -22,6 +22,8 @@ SRC_DIR     = srcs
 I_DIR       = includes
 LIBFT_DIR   = libft
 MLX_DIR     = minilibx-linux
+MLX_REPO	= https://github.com/42Paris/minilibx-linux.git
+MLX			= $(MLX_DIR)/libmlx.a
 
 # Libraries
 LIBFT       = $(LIBFT_DIR)/libft.a
@@ -113,9 +115,13 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
 
 $(MLX):
-	@echo "$(YELLOW)Compiled:$(RESET) $(MLX_DIR) $<"
+	@if [ ! -d "$(MLX_DIR)" ]; then \
+		echo "$(YELLOW)Cloning minilibx...$(RESET)"; \
+		git clone $(MLX_REPO) $(MLX_DIR); \
+	fi
 	@$(MAKE) -s -C $(MLX_DIR) --no-print-directory > /dev/null 2>&1 || true
 	@echo "$(GREEN)✓ MLX ready!$(RESET)"
+
 
 %.o: %.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@

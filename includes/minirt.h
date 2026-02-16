@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/16 14:45:31 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 15:43:40 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include "../X11/X.h"
 # include "../X11/keysym.h"
 
-# define ERROR_PARAM "Error\nUsage: ./minirt <file.rt>"
+# define ERROR_PARAM "Error: wrong params\nUsage: ./minirt --help"
 # define ERROR_FRAMES "Error\nUsage: ./minirt <file.rt> --frames <numFirstFrame> <numLastFrame>"
 # define ERROR_FILE "Error\nCannot open this found."
 # define ERROR_MALLOC "Error\nCannot allocate memmory."

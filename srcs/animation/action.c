@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:05:20 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/16 14:20:54 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 15:32:57 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,23 @@ void	render_animation(t_scene *sc)
 
 	frame = startFrame;
 	while (frame <= endFrame)
-	{
+	{	
 		update_time(sc);
 
 		update_scene(sc); // <--- when you move your scene
 
-		image_clear(sc->image);
+		if(frame >= 849)
+		{
+			image_clear(sc->image);
 
-		if(low_render)
-			low_render_scene(sc);
-		else
-			render_scene(sc);
+			if(low_render)
+				low_render_scene(sc);
+			else
+				render_scene(sc);
 
-		sprintf(name, "frames/frame_%04d.ppm", frame);
-		save_image_ppm(sc->image, name);
-
+			sprintf(name, "frames/frame_%04d.ppm", frame);
+			save_image_ppm(sc->image, name);
+		}
 		printf("frame %d done\n", frame);
 		frame++;
 	}

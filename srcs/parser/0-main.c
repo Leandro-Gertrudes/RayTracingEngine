@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:44:29 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/13 12:29:25 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 15:58:10 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,26 @@ int	main(int argc, char **argv)
 		menu();
 		return (0);
 	}
+
+	if (argc == 2 && !ft_strcmp(argv[1], "--help"))
+	{
+		printf("\nminiRT — Mini Ray Tracer (42 Project)\n\n");
+
+		printf("Usage:\n");
+		printf("  %-50s %s\n", "./miniRT",
+			"Start program with default behavior");
+		printf("  %-50s %s\n", "./miniRT <scene.rt>",
+			"Render the given scene file");
+		printf("  %-50s %s\n", "./miniRT <scene.rt> --lowRender",
+			"Render scene with reduced resolution");
+		printf("  %-50s %s\n", "./miniRT <scene.rt> --animate",
+			"Animate scene in real time");
+		printf("  %-50s %s\n",
+			"./miniRT <scene.rt> --frames <first> <last>",
+			"Render animation and save frames to ./frames");
+		return (0);
+	}
+
 	if (argc > 6 || ft_is_rt(argv[1]))
 	ft_exit(ERROR_PARAM, 1);
 
