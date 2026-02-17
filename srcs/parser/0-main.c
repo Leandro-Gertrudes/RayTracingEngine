@@ -6,10 +6,11 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:44:29 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/17 14:19:02 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/17 16:56:49 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+int	ft_demo(void);
 
 #include "minirt.h"
 
@@ -38,6 +39,9 @@ int	main(int argc, char **argv)
 
 	if (argc == 2 && !ft_strcmp(argv[1], "--commands"))
 		return(ft_commands());
+
+	if (argc == 2 && !ft_strcmp(argv[1], "--demo"))
+		return(ft_demo());
 
 	if (argc > 6 || ft_is_rt(argv[1]))
 	ft_exit(ERROR_PARAM, 1);

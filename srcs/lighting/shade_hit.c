@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 14:57:47 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/01/18 15:27:28 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:48:53 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@ t_rgb	shade_hit(t_scene *sc, t_hit *hit, t_vec3 point, t_vec3 normal)
 		obj_color = ((t_cylinder *)hit->object)->color;
 	else
 		obj_color = ((t_triangle *)hit->object)->color;
-
-	/* garante normal correta */
-	// if (vec3_dot(normal, vec3_sub(point, sc->camera->position)) < 0)
-	// 	normal = vec3_scale(normal, -1);
 
 	color = apply_ambient(sc, obj_color);
 	i = 0;

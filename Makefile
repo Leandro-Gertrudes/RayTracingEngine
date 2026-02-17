@@ -6,7 +6,7 @@
 #    By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/13 20:39:24 by ghenriqu          #+#    #+#              #
-#    Updated: 2026/02/16 15:41:42 by lgertrud         ###   ########.fr        #
+#    Updated: 2026/02/17 16:55:00 by lgertrud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,6 +94,7 @@ SRC	=	$(SRC_DIR)/parser/0-main.c \
 			$(SRC_DIR)/editor/save_scene.c \
 		$(SRC_DIR)/menu/start_menu.c \
 		$(SRC_DIR)/menu/load_scenes.c \
+		$(SRC_DIR)/menu/demo.c \
 
 OBJS        = $(SRC:.c=.o)
 OBJS_BONUS  = $(SRC_BONUS:.c=.o)

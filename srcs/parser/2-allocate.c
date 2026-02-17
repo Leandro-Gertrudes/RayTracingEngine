@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   2-allocate_bonus.c                                 :+:      :+:    :+:   */
+/*   2-allocate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 12:08:27 by lgertrud          #+#    #+#             */
-/*   Updated: 2025/12/29 18:12:39 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/17 15:21:35 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	ft_put_argument(t_args *args, int fd)
 			args->light[k++] = ft_strdup(trimmed);
 		else if (ft_is_object(trimmed))
 			args->objects[i++] = ft_strdup(trimmed);
-		else if (trimmed[0] != '\n' && trimmed[0] != '#' && trimmed[0] != '\0')
+		else if (trimmed[0] != '\n' && trimmed[0] != '#' && trimmed[0] != '\0' && trimmed[0] != 'R')
 			ft_is_double(args, "invalid", trimmed, fd);
 		line = free_and_getline(line, trimmed, fd);
 	}
