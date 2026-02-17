@@ -6,11 +6,10 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:44:29 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/16 15:58:10 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:19:02 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void shoot_projectile();
 
 #include "minirt.h"
 
@@ -27,7 +26,7 @@ double	g_scale_edit = 0.3;
 int	main(int argc, char **argv)
 {
 	int	i;
-	shoot_projectile();
+
 	if(argc == 1)
 	{
 		menu();
@@ -35,23 +34,10 @@ int	main(int argc, char **argv)
 	}
 
 	if (argc == 2 && !ft_strcmp(argv[1], "--help"))
-	{
-		printf("\nminiRT — Mini Ray Tracer (42 Project)\n\n");
+		return(ft_help());
 
-		printf("Usage:\n");
-		printf("  %-50s %s\n", "./miniRT",
-			"Start program with default behavior");
-		printf("  %-50s %s\n", "./miniRT <scene.rt>",
-			"Render the given scene file");
-		printf("  %-50s %s\n", "./miniRT <scene.rt> --lowRender",
-			"Render scene with reduced resolution");
-		printf("  %-50s %s\n", "./miniRT <scene.rt> --animate",
-			"Animate scene in real time");
-		printf("  %-50s %s\n",
-			"./miniRT <scene.rt> --frames <first> <last>",
-			"Render animation and save frames to ./frames");
-		return (0);
-	}
+	if (argc == 2 && !ft_strcmp(argv[1], "--commands"))
+		return(ft_commands());
 
 	if (argc > 6 || ft_is_rt(argv[1]))
 	ft_exit(ERROR_PARAM, 1);
@@ -119,9 +105,80 @@ void	ft_minirt(char	*file)
 	mlx_loop(scene->disp.mlx);
 }
 
-void	ft_exit(char *message, int code)
+int	ft_help(void)
 {
-	if (message)
-		ft_putendl_fd(message, 2);
-	exit(code);
+		printf("\nminiRT — Mini Ray Tracer (42 Project)\n\n");
+
+	printf("Usage:\n");
+	printf("  %-50s %s\n", "./miniRT",
+		"Start program with default behavior");
+	printf("  %-50s %s\n", "./miniRT <scene.rt>",
+		"Render the given scene file");
+	printf("  %-50s %s\n", "./miniRT <scene.rt> --lowRender",
+		"Render scene with reduced resolution");
+	printf("  %-50s %s\n", "./miniRT <scene.rt> --animate",
+		"Animate scene in real time");
+	printf("  %-50s %s\n",
+		"./miniRT <scene.rt> --frames <first> <last>",
+		"Render animation and save frames to ./frames");
+	printf("  %-50s %s\n",
+		"./miniRT --commands",
+		"view commands");
+	return (0);
+}
+
+int	ft_commands(void)
+{
+	printf("\nminiRT — Commands Reference\n\n");
+
+	printf("=== GENERAL ===\n");
+	printf("  %-35s %s\n", "ESC",          "Exit the program");
+	printf("  %-35s %s\n", "F1",           "Return to scene menu");
+	printf("  %-35s %s\n", "SPACE",        "Toggle preview / full render");
+	printf("  %-35s %s\n", "CAPSLOCK",     "Save current scene to file");
+	printf("\n");
+
+	printf("=== CAMERA (preview mode) ===\n");
+	printf("  %-35s %s\n", "W / S",        "Move forward / backward");
+	printf("  %-35s %s\n", "A / D",        "Move left / right");
+	printf("  %-35s %s\n", "Q / E",        "Move up / down");
+	printf("  %-35s %s\n", "Arrow UP/DOWN","Rotate pitch");
+	printf("  %-35s %s\n", "Arrow LEFT/RIGHT", "Rotate yaw");
+	printf("  %-35s %s\n", "Z / C",        "Rotate roll");
+	printf("  %-35s %s\n", "Scroll",       "Adjust FOV");
+	printf("\n");
+
+	printf("=== ADD OBJECTS (preview, no selection) ===\n");
+	printf("  %-35s %s\n", "1",            "Add sphere");
+	printf("  %-35s %s\n", "2",            "Add cylinder");
+	printf("  %-35s %s\n", "3",            "Add triangle");
+	printf("  %-35s %s\n", "4",            "Add plane");
+	printf("  %-35s %s\n", "5",            "Add light");
+	printf("\n");
+
+	printf("=== EDIT OBJECT (click to select) ===\n");
+	printf("  %-35s %s\n", "W / S",        "Move on Y axis");
+	printf("  %-35s %s\n", "A / D",        "Move on X axis");
+	printf("  %-35s %s\n", "Scroll",       "Move on Z axis");
+	printf("  %-35s %s\n", "Arrow UP/DOWN","Rotate pitch");
+	printf("  %-35s %s\n", "Arrow LEFT/RIGHT", "Rotate yaw");
+	printf("  %-35s %s\n", "Z / C",        "Rotate roll");
+	printf("  %-35s %s\n", "J / K",        "Decrease / increase size");
+	printf("  %-35s %s\n", "N / M",        "Decrease / increase height (cylinder)");
+	printf("  %-35s %s\n", "I / O",        "Decrease / increase reflectivity");
+	printf("  %-35s %s\n", "T",            "Edit color (terminal prompt)");
+	printf("  %-35s %s\n", "+ / -",        "Adjust edit sensitivity");
+	printf("  %-35s %s\n", "BACKSPACE",    "Remove selected object");
+	printf("  %-35s %s\n", "Q",            "Deselect object");
+	printf("\n");
+
+	printf("=== LIGHTS ===\n");
+	printf("  %-35s %s\n", "LEFT SHIFT",   "Toggle light edit mode");
+	printf("  %-35s %s\n", "[ / ]",        "Select previous / next light");
+	printf("  %-35s %s\n", "P",            "Set light position (terminal prompt)");
+	printf("  %-35s %s\n", "J / K",        "Decrease / increase intensity");
+	printf("  %-35s %s\n", "T",            "Edit light color (terminal prompt)");
+	printf("\n");
+
+	return (0);
 }

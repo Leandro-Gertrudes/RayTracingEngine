@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   support_functions1_bonus.c                         :+:      :+:    :+:   */
+/*   support_functions1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 16:13:14 by lgertrud          #+#    #+#             */
-/*   Updated: 2025/12/29 18:55:47 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:12:24 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,11 @@ char	*free_and_getline(char *line, char *trimmed, int fd)
 	free(trimmed);
 	free(line);
 	return (line = get_next_line(fd));
+}
+
+void	ft_exit(char *message, int code)
+{
+	if (message)
+		ft_putendl_fd(message, 2);
+	exit(code);
 }

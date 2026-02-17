@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:05:20 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/16 15:32:57 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/16 17:11:22 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	render_animation(t_scene *sc)
 
 	frame = startFrame;
 	while (frame <= endFrame)
-	{	
+	{
 		update_time(sc);
 
 		update_scene(sc); // <--- when you move your scene
 
-		if(frame >= 849)
+		if(frame >= 878)
 		{
 			image_clear(sc->image);
 

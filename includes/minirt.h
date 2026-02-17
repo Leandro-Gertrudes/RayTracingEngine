@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/16 16:31:03 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:18:03 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -414,6 +414,8 @@ t_obj_type		ft_get_type(char *line);
 char			*ft_tab_to_space(char *str);
 void			ft_free_objects_struc(t_object **arr, int count);
 double			ft_get_reflectivity(t_obj_type type, char *line);
+int				ft_help(void);
+int				ft_commands(void);
 
 // ============ Vectors ============
 
@@ -484,46 +486,44 @@ void			ft_init_graphics(t_scene *scene);
 
 // ==== animation ====
 
-int		render_loop(void *param);
-void	update_scene(t_scene *sc);
-void	update_anim_camera(t_scene *sc);
-void	init_anim_camera(t_scene *sc);
-int		render_loop(void *param);
-void	save_image_ppm(t_image *img, char *filename);
-void	render_animation(t_scene *sc);
-void	update_time(t_scene *sc);
-t_image	*image_create(int width, int height);
-void	image_clear(t_image *img);
-void	update_dragon(t_scene *scene);
-void	update_diamond_rotation(t_scene *sc);
-void	update_billiard(t_scene *sc);
-void	update_falling_sphere(t_scene *sc);
-void	update_anim_spheres(t_scene *sc);
+int				render_loop(void *param);
+void			update_scene(t_scene *sc);
+int				render_loop(void *param);
+void			save_image_ppm(t_image *img, char *filename);
+void			render_animation(t_scene *sc);
+void			update_time(t_scene *sc);
+t_image			*image_create(int width, int height);
+void			image_clear(t_image *img);
+void			update_dragon(t_scene *scene);
+void			update_diamond_rotation(t_scene *sc);
+void			update_billiard(t_scene *sc);
+void			update_falling_sphere(t_scene *sc);
+void			update_anim_spheres(t_scene *sc);
 
 // ==== edit mode ====
 
-void	edit_obj(t_scene *scene, t_object *obj_edit, int keycode);
-void	add_object(t_scene *scene, int keycode);
-void 	remove_obj(t_scene *scene);
-void	move_obj_xy(t_scene *scene, t_object *obj_edit, int keycode);
-void	move_obj_z(t_scene *scene, t_object *obj_edit, int button);
-void	move_obj_angule(t_scene *scene, t_object *obj_edit, int button);
-void	size_obj(t_scene *scene, t_object *obj_edit, int keycode);
-void	color_obj_edit(t_scene *scene, t_object *obj_edit, int keycode);
-void	add_light(t_scene *scene);
-void	remove_light(t_scene *scene);
-void 	reflectivity_update(t_scene *scene, t_object *obj_edit, int keycode);
-void	draw_hud_obj(t_scene *scene, t_obj_type type, void *data);
-void	show_infos(t_scene *scene, t_obj_type type,
-			void *data, int x, int line_y);
-int		mouse_hook(int button,int x, int y, t_scene *scene);
-void	draw_hud(t_scene *scene);
-int		move_camera(t_scene *scene, int keycode);
-void 	update_move(int keycode);
-void 	low_light(t_scene *scene, t_hit *hit, t_ray ray, double *t);
-void	select_light(t_scene *scene, int keycode);
-void	position_light(t_scene *scene);
-void	save_scene(t_scene *scene);
+void			edit_obj(t_scene *scene, t_object *obj_edit, int keycode);
+void			add_object(t_scene *scene, int keycode);
+void 			remove_obj(t_scene *scene);
+void			move_obj_xy(t_scene *scene, t_object *obj_edit, int keycode);
+void			move_obj_z(t_scene *scene, t_object *obj_edit, int button);
+void			move_obj_angule(t_scene *scene, t_object *obj_edit, int button);
+void			size_obj(t_scene *scene, t_object *obj_edit, int keycode);
+void			color_obj_edit(t_scene *scene, t_object *obj_edit, int keycode);
+void			add_light(t_scene *scene);
+void			remove_light(t_scene *scene);
+void 			reflectivity_update(t_scene *scene, t_object *obj_edit, int keycode);
+void			draw_hud_obj(t_scene *scene, t_obj_type type, void *data);
+void			show_infos(t_scene *scene, t_obj_type type,
+					void *data, int x, int line_y);
+int				mouse_hook(int button,int x, int y, t_scene *scene);
+void			draw_hud(t_scene *scene);
+int				move_camera(t_scene *scene, int keycode);
+void 			update_move(int keycode);
+void 			low_light(t_scene *scene, t_hit *hit, t_ray ray, double *t);
+void			select_light(t_scene *scene, int keycode);
+void			position_light(t_scene *scene);
+void			save_scene(t_scene *scene);
 
 // ==== menu ====
 

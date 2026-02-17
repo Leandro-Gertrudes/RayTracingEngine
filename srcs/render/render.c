@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 18:48:20 by ghenriqu          #+#    #+#             */
-/*   Updated: 2026/02/13 11:48:47 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:21:47 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_render_st
 }	t_render_st;
 */
 
-
+/* -------- fresnel ----------*/
 // double	fresnel_schlick(double cos_theta, double f0)
 // {
 // 	return (f0 + (1.0 - f0) * pow(1.0 - cos_theta, 5.0));
@@ -97,37 +97,29 @@ typedef struct s_render_st
 // 	if (depth <= 0 || !hit_objects(scene, ray, &hit))
 // 		return ((t_rgb){0, 0, 0});
 
-// 	// Ponto de impacto
 // 	rd.point = vec3_add(ray.origin,
 // 			vec3_scale(ray.direction, hit.t));
 
-// 	// Normal correta
 // 	rd.normal = vec3_normalize(get_normal(&hit, rd.point));
 // 	if (vec3_dot(rd.normal, ray.direction) > 0)
 // 		rd.normal = vec3_scale(rd.normal, -1);
 
-// 	// Iluminação local
+
 // 	rd.local_color = shade_hit(scene, &hit, rd.point, rd.normal);
 
-// 	// Direção de entrada normalizada
 // 	in_dir = vec3_normalize(ray.direction);
 
-// 	// Ângulo entre view e normal
 // 	cos_theta = -vec3_dot(in_dir, rd.normal);
 // 	if (cos_theta < 0.0)
 // 		cos_theta = 0.0;
 
-// 	// Reflexividade base do material
 // 	r = get_reflectivity(&hit);
 
-// 	// Fresnel (Schlick)
 // 	fresnel = fresnel_schlick(cos_theta, r);
 
-// 	// Se não reflete, retorna shading normal
 // 	if (fresnel <= 0.001)
 // 		return (rd.local_color);
 
-// 	// Raio refletido
 // 	rd.reflected_ray.origin = vec3_add(
 // 			rd.point,
 // 			vec3_scale(rd.normal, 1e-6)
@@ -140,7 +132,6 @@ typedef struct s_render_st
 // 			depth - 1
 // 	);
 
-// 	// Mistura com Fresnel
 // 	return (rgb_clamp(rgb_add(
 // 			vec3_rgb_scale(rd.local_color, 1.0 - fresnel),
 // 			vec3_rgb_scale(rd.reflected_color, fresnel)
@@ -158,9 +149,9 @@ t_rgb	compute_pixel_color(t_scene *scene, t_ray ray, int depth)
 		return ((t_rgb){0, 0, 0});
 	rd.point = vec3_add(ray.origin, vec3_scale(ray.direction, hit.t));
 	rd.normal = get_normal(&hit, rd.point);
-	rd.local_color = shade_hit(scene, &hit, rd.point, rd.normal);
 	if (vec3_dot(rd.normal, ray.direction) > 0)
 		rd.normal = vec3_scale(rd.normal, -1);
+	rd.local_color = shade_hit(scene, &hit, rd.point, rd.normal);
 	r = get_reflectivity(&hit);
 	if (r <= 0.0)
 		return (rd.local_color);
