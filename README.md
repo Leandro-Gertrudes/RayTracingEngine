@@ -18,7 +18,7 @@ Beyond the mandatory subject requirements, this implementation includes a full *
 
 ##  What is Ray Tracing?
 
-Ray tracing is a rendering technique that simulates how light physically behaves in a scene. Instead of rasterizing geometry, it works **backwards** — for each pixel on the screen, a ray is cast from the camera into the scene. If the ray hits an object, the renderer calculates:
+Ray tracing is a rendering technique that simulates how light physically behaves in a scene. Instead of rasterizing geometry, it works **backwards**, for each pixel on the screen, a ray is cast from the camera into the scene. If the ray hits an object, the renderer calculates:
 
 1. **What hit?** — intersection tests are performed against every primitive (sphere, plane, cylinder, triangle)
 2. **What color is it?** — the surface material and color are retrieved
@@ -26,7 +26,7 @@ Ray tracing is a rendering technique that simulates how light physically behaves
 4. **How does it look?** — the final color is computed using ambient, diffuse, and specular components
 5. **Does it reflect?** — if the surface has reflectivity > 0, a new reflected ray is cast recursively
 
-This process naturally produces effects like **hard shadows**, **specular highlights**, and **mirror-like reflections** that are difficult or expensive to fake in rasterization pipelines. The tradeoff is that it is computationally heavy — which is why miniRT parallelizes rendering with threads.
+This process naturally produces effects like **hard shadows**, **specular highlights**, and **mirror-like reflections** that are difficult or expensive to fake in rasterization pipelines. The tradeoff is that it is computationally heavy, which is why miniRT parallelizes rendering with threads.
 
 ---
 
@@ -277,7 +277,7 @@ tr->a.z = center.z + (offset.x * sin_a + offset.z * cos_a);
 
 ### Adding your own animation
 
-To create a new animation, write a function that modifies any objects in `sc->objects[]` or lights in `sc->lights[]`, then call it inside `update_scene()`. Any geometric property — position, size, rotation axis, color — can be changed each frame.
+To create a new animation, write a function that modifies any objects in `sc->objects[]` or lights in `sc->lights[]`, then call it inside `update_scene()`. Any geometric property, position, size, rotation axis, color, can be changed each frame.
 
 ---
 
