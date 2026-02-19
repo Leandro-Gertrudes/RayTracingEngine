@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:05:20 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/16 17:11:22 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/19 17:46:48 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ void	update_scene(t_scene *sc)
 {
 	update_time(sc);
 
-	//update_diamond_rotation(sc); // run with ./miniRT scene/diamond.rt --animate or --frames
+	update_diamond_rotation(sc); // run with ./miniRT scene/diamond.rt --animate or --frames
 	//update_rain(sc); // run with ./miniRT scene/rain.rt --animate or --frames
 	//update_billiard(sc); // run with ./miniRT scene/billard.rt --animate or --frames
 	//update_falling_sphere(sc); // run with ./miniRT scene/spheres.rt --animate or --frames
 	//update_anim_spheres(sc); // run with ./miniRT scene/losangle.rt --animate or --frames
-	update_dragon(sc); //(HEAVY!) run with ./miniRT scene/dragon.rt --animate or --frames 
+	//update_dragon(sc); //(HEAVY!) run with ./miniRT scene/dragon.rt --animate or --frames 
 
 	sc->camera->camdata = ft_compute_camera(
 		*sc->camera,
