@@ -2,6 +2,7 @@
 
 > A ray tracer written in C from scratch, built as a 42 School project.
 
+![demo](screenshots/screenshot_0004.png)
 ![language](https://img.shields.io/badge/language-C-blue)
 ![school](https://img.shields.io/badge/school-42-black)
 
