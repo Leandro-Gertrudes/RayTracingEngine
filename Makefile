@@ -6,7 +6,7 @@
 #    By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/13 20:39:24 by ghenriqu          #+#    #+#              #
-#    Updated: 2026/02/19 12:39:18 by lgertrud         ###   ########.fr        #
+#    Updated: 2026/02/19 15:13:53 by lgertrud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME		= miniRT
 # Compiler
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror -g
-LDFLAGS     = -lm
+LDFLAGS     = -lm -pthread
 
 # Directories
 SRC_DIR     = srcs

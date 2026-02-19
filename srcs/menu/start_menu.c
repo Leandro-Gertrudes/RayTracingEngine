@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 10:33:54 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/19 12:30:15 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:56:43 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	menu_key_hook(int key, t_menu *m)
 {
 	int	max_page;
 
-	printf("%d\n", key);
+	//printf("%d\n", key);
 	max_page = (m->scene_count - 1) / m->scenes_per_page;
 
 
@@ -146,7 +146,7 @@ int	menu_key_hook(int key, t_menu *m)
 		m->mode_selected++;
 	else if (key == KEY_MINUS && m->mode_selected > 0)
 		m->mode_selected--;
-	else if (key == KEY_ENTER || key == KEY_LEFT_ENTER)
+	else if (key == KEY_ENTER || key == KEY_RIGTH_ENTER)
 	{
 		if (enter_blocked)
 		{
@@ -156,6 +156,9 @@ int	menu_key_hook(int key, t_menu *m)
 		start_render_from_menu(m);
 	}
 		
+	if(key == KEY_LEFT_CTRL)
+		ft_commands();
+	
 	if (key == KEY_ESQ)
 	{
 		mlx_loop_end(m->mlx);

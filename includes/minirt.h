@@ -6,12 +6,12 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/19 12:39:01 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:56:40 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_BONUS_H
-# define MINIRT_BONUS_H
+#ifndef MINIRTH
+# define MINIRTH
 
 # include "libft.h"
 # include <fcntl.h>
@@ -50,8 +50,9 @@
 #define KEY_LEFT			65361
 #define KEY_RIGHT			65363
 #define KEY_ENTER			65293
-#define KEY_LEFT_ENTER		65421
+#define KEY_RIGTH_ENTER		65421
 #define KEY_LEFT_SHIFT		65505
+#define KEY_LEFT_CTRL		65507
 #define KEY_CAPSLOCK		65509 
 #define KEY_TAB				65289 
 #define KEY_BACKSPACE		65288
@@ -266,8 +267,6 @@ typedef struct s_scene
 	int				object_count;
 	t_graphics		disp;
 	t_time			time;
-	t_anim_light	anim_light[2];
-	t_anim_camera	anim_camera;
 	t_image			*image;
 	t_object		obj_edit;
 }	t_scene;
@@ -531,4 +530,6 @@ void			screenshots(t_scene *scene);
 
 void	menu(void);
 char	**load_scenes(char *path, int *scene_count);
+void    header(void);
+
 #endif

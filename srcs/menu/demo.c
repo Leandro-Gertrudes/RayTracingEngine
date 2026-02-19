@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 16:54:40 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/17 17:42:14 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:52:48 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,17 @@ void ft_demo(void)
 	printf("        github.com/leandro-gertrudes\n");
 	printf("=====================================\n\n");
 
+}
+
+void    header()
+{
+    const char *BLUE   = "\033[1;34m";
+    const char *CYAN   = "\033[1;36m";
+    const char *YELLOW = "\033[1;33m";
+    const char *RESET  = "\033[0m";
+    
+    printf("%s========================================%s\n\n", CYAN, RESET);
+    printf("%sWelcome to miniRT - Mini Ray Tracer%s\n", YELLOW, RESET);
+    printf("%sPress LEFT CTRL to show available commands in the terminal%s\n\n", BLUE, RESET);
+    printf("%s========================================%s\n\n", CYAN, RESET);
 }
