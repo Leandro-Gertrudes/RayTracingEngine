@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/17 14:18:03 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/19 12:39:01 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@
 #define KEY_ENTER			65293
 #define KEY_LEFT_ENTER		65421
 #define KEY_LEFT_SHIFT		65505
-#define KEY_CAPSLOCK		65509
+#define KEY_CAPSLOCK		65509 
+#define KEY_TAB				65289 
 #define KEY_BACKSPACE		65288
 #define KEY_PLUS			61
 #define KEY_MINUS			45
@@ -524,6 +525,7 @@ void 			low_light(t_scene *scene, t_hit *hit, t_ray ray, double *t);
 void			select_light(t_scene *scene, int keycode);
 void			position_light(t_scene *scene);
 void			save_scene(t_scene *scene);
+void			screenshots(t_scene *scene);
 
 // ==== menu ====
 

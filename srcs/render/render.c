@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 18:48:20 by ghenriqu          #+#    #+#             */
-/*   Updated: 2026/02/17 14:21:47 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/19 13:01:11 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,8 @@ void	*render_thread(void *arg)
 					data->scene,
 					make_ray(x, y, data->scene),
 					DEPTH);
-			if (g_mode == SAVE_FRAMES)
-				image_put_pixel(data->scene->image, x, y, color);
-			else
+			image_put_pixel(data->scene->image, x, y, color);
+			if(g_mode != SAVE_FRAMES)
 				put_pixel(data->scene, x ,y, rgb_to_int(color));
 			x++;
 		}

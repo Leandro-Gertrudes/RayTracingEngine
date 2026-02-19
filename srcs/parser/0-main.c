@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:44:29 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/17 16:56:49 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/19 12:35:12 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,9 @@ int	ft_help(void)
 	printf("  %-50s %s\n",
 		"./miniRT --commands",
 		"view commands");
+	printf("  %-50s %s\n",
+		"./miniRT --demo",
+		"showcase demo");
 	return (0);
 }
 
@@ -139,7 +142,8 @@ int	ft_commands(void)
 	printf("  %-35s %s\n", "ESC",          "Exit the program");
 	printf("  %-35s %s\n", "F1",           "Return to scene menu");
 	printf("  %-35s %s\n", "SPACE",        "Toggle preview / full render");
-	printf("  %-35s %s\n", "CAPSLOCK",     "Save current scene to file");
+	printf("  %-35s %s\n", "TAB",   		"Screenshot");
+	printf("  %-35s %s\n", "CAPSLOCK",   	"Save current scene to file");
 	printf("\n");
 
 	printf("=== CAMERA (preview mode) ===\n");

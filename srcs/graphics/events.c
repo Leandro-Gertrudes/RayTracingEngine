@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:42:38 by ghenriqu          #+#    #+#             */
-/*   Updated: 2026/02/16 16:36:40 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/02/19 12:46:27 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,15 @@ int	key_press(int keycode, t_scene *scene)
 		ft_free_scene(scene);
 		menu();
 	}
-
 	
 	if(g_edit_color)
 		return (0);
-	if(keycode == KEY_CAPSLOCK)
+	if(keycode == KEY_TAB)
 		save_scene(scene);
+	if(keycode == KEY_CAPSLOCK)
+	{
+		screenshots(scene);
+	}
 	if (keycode == KEY_SPACE)
 	{
 		low_render = !low_render;
