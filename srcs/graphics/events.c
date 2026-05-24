@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:42:38 by ghenriqu          #+#    #+#             */
-/*   Updated: 2026/02/19 15:55:43 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/05/24 15:12:53 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	close_window(t_scene *scene)
 	exit(0);
 	return (0);
 }
-
-int	key_press(int keycode, t_scene *scene)
+int	key_press(int keycode, void *param)
 {
+	t_scene	*scene = (t_scene *)param;
 	if (keycode == KEY_ESQ)
 		return (close_window(scene));
 

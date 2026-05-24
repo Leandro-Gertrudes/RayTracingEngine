@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:42:30 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/19 15:56:40 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/05/24 15:14:21 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -480,7 +480,7 @@ t_rgb			get_pixel(t_scene *scene, int x, int y);
 void			image_put_pixel(t_image *img, int x, int y, t_rgb color);
 
 // ==== graphics ====
-int				key_press(int keycode, t_scene *scene);
+int				key_press(int keycode, void *scene);
 int				close_window(t_scene *scene);
 void			ft_init_graphics(t_scene *scene);
 
@@ -516,7 +516,7 @@ void 			reflectivity_update(t_scene *scene, t_object *obj_edit, int keycode);
 void			draw_hud_obj(t_scene *scene, t_obj_type type, void *data);
 void			show_infos(t_scene *scene, t_obj_type type,
 					void *data, int x, int line_y);
-int				mouse_hook(int button,int x, int y, t_scene *scene);
+int				mouse_hook(int button,int x, int y, void *scene);
 void			draw_hud(t_scene *scene);
 int				move_camera(t_scene *scene, int keycode);
 void 			update_move(int keycode);

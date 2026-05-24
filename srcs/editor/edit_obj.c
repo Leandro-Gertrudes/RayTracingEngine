@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 14:22:04 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/16 16:33:48 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/05/24 15:13:56 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,8 +230,9 @@ static int	click(int x, int y, t_scene *scene)
 	return (0);
 }
 
-int	mouse_hook(int button,int x, int y, t_scene *scene)
+int	mouse_hook(int button, int x, int y, void *param)
 {
+	t_scene	*scene = (t_scene *)param;
 	(void)x;
 	(void)y;
 

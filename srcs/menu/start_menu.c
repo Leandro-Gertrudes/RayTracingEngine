@@ -6,7 +6,7 @@
 /*   By: lgertrud <lgertrud@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 10:33:54 by lgertrud          #+#    #+#             */
-/*   Updated: 2026/02/19 15:56:43 by lgertrud         ###   ########.fr       */
+/*   Updated: 2026/05/24 15:15:45 by lgertrud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,10 @@ int	menu_render(t_menu *m)
 }
 
 
-int	menu_key_hook(int key, t_menu *m)
+int	menu_key_hook(int key, void *me)
 {
+	t_menu	*m = (t_menu *)me;
+	
 	int	max_page;
 
 	//printf("%d\n", key);
